@@ -8,7 +8,7 @@
     </head>
     <body>
 
-        <form action="validacao_login.php" method="POST">
+        <form action="../inludes/validacao_login.php" method="POST">
             <h1>Gestão Escolar</h1>
             <p>Preencha suas credenciais de login para continuar</p>
 

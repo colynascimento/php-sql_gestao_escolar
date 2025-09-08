@@ -6,6 +6,7 @@
         <title>Login | Gestão Escolar</title>
         <link rel="stylesheet" href="../css/style.css">
     </head>
+    
     <body id="pagina-login">
 
         <form id="form-login" action="../inludes/validacao_login.php" method="POST">

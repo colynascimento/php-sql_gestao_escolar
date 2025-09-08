@@ -12,7 +12,14 @@
     font-size: 16px;
     background-image: url('../imgs/gestao_escolar_wallpaper.png');
     background-size: cover;
-    background-position: center;
+    background-position: top;
     background-repeat: no-repeat;
     width: 100%;
+}
+
+#form-login {
+    background-color: #fff;
+    width: 500px;
+    color: #1b1b1b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }

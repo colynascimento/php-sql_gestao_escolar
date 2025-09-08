@@ -1,6 +1,6 @@
 <?php
 // Inclui o arquivo de conexão com o banco de dados
-include 'conexao.php';
+include('../conexao/conexao.php');
 
 /**
  * Função para listar registros de qualquer tabela do banco

@@ -15,9 +15,11 @@
 
             <label class="credenciais-login" for="usuario-email">E-mail</label>
             <input  class="credenciais-login" type="email" name="usuario-email" placeholder="email@gestaoescolar.com.br" required>
+            <div class="input-linha"></div>
 
             <label  class="credenciais-login" for="usuario-senha">Senha</label>
             <input  class="credenciais-login" type="password" name="usuario-senha" placeholder="senhadeacesso" required>
+            <div class="input-linha"></div>
 
             <div id="container-btn-login">
                 <button id="form-btn" type="submit">Entrar</button>

@@ -3,31 +3,71 @@ include('../conexao/conexao.php');  // abre a conexão
 include('../inludes/header.php');   // cabeçalho
 include('../api/exibir.php');
 include('../api/adicionar.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $dados = [
+        "cpf" => $_POST['cpf'] ?? null,
+        "nome" => $_POST['nome'] ?? null,
+        "data_nasc" => $_POST['data_nascimento'] ?? null,
+        "num_turma" => $_POST['turma'] ?? null
+    ];
+
+
+    $resultado = inserirRegistro($conn, "alunos", $dados);
+
+    if ($resultado === true) {
+        echo "<p>Registro adicionado com sucesso!</p>";
+    } else {
+        echo "<p>$resultado</p>"; // já mostra se for duplicata
+    }
+}
 ?>
 
-<form action="" method="POST">
-    <h2>Cadastrar alunos</h2>
+<script>
+function validarFormulario() {
+    let cpf = document.getElementById("cpf").value;
+    let nome = document.getElementById("nome").value;
+    let nascimento = document.getElementById("data_nascimento").value;
+    let turma = document.getElementById("turma").value;
 
-    <label for="CPF_aluno">CFP do aluno</label>
-    <input type="number" name="CPF_aluno" placeholder="ex:1234567891011" required>
+    if (cpf.length !== 11 || isNaN(cpf)) {
+        alert("CPF deve conter 11 números.");
+        return false;
+    }
+    if (nome.trim().length < 3) {
+        alert("Nome deve ter pelo menos 3 caracteres.");
+        return false;
+    }
+    if (!nascimento) {
+        alert("Informe a data de nascimento.");
+        return false;
+    }
+    if (turma <= 0) {
+        alert("Turma deve ser um número positivo.");
+        return false;
+    }
 
-    <label for="nome_aluno">Nome do aluno</label>
-    <input type="string" name="nome_aluno" placeholder="ex:Luiz Inacio Lula da Silva" required>
+    return true;
+}
+</script>
 
-    <label for="data_nascimento">Data de nascimento</label>
-    <input type="date" name="data_nascimento"required>
+<form method="POST" onsubmit="return validarFormulario()">
+    <label>CPF:</label>
+    <input type="number" name="cpf" id="cpf" required><br><br>
 
-    <label for="num_turma">Numero da turma</label>
-    <input type="number" name="num_turma" required>
+    <label>Nome:</label>
+    <input type="text" name="nome" id="nome" required><br><br>
 
+    <label>Data de Nascimento:</label>
+    <input type="date" name="data_nascimento" id="data_nascimento" required><br><br>
 
-    <div id="btn-container">
-        <button type="submit">Mandar formulario</button>
-    </div>
-</form> 
+    <label>Turma:</label>
+    <input type="text" name="turma" id="turma" required><br><br>
+
+    <input type="submit" value="Cadastrar">
+</form>
 
 <?php
-adicionarTabela($conn, "alunos",$colunas,$valores);
 listarTabela($conn,"alunos");
 include('../inludes/footer.php');
 ?>

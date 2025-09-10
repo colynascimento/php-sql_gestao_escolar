@@ -4,24 +4,28 @@ include('../inludes/header.php');   // cabeçalho
 include('../api/exibir.php');
 include('../api/adicionar.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $dados = [
-        "cpf" => $_POST['cpf'] ?? null,
-        "nome" => $_POST['nome'] ?? null,
-        "data_nasc" => $_POST['data_nascimento'] ?? null,
-        "num_turma" => $_POST['turma'] ?? null
-    ];
-
-
-    $resultado = inserirRegistro($conn, "alunos", $dados);
-
-    if ($resultado === true) {
-        echo "<p>Registro adicionado com sucesso!</p>";
-    } else {
-        echo "<p>$resultado</p>"; // já mostra se for duplicata
-    }
-}
 ?>
+
+
+<form method="POST" onsubmit="return validarFormulario()">
+    <label>CPF:</label>
+    <input type="number" name="cpf" id="cpf" required><br><br>
+
+    <label>Nome:</label>
+    <input type="text" name="nome" id="nome" required><br><br>
+
+    <label>Data de Nascimento:</label>
+    <input type="date" name="data_nascimento" id="data_nascimento" required><br><br>
+
+    <label>Turmas:</label>
+    <select name="turma" id="turma">
+        <option value="maca">Maçã</option>
+        <option value="banana">Banana</option>
+        <option value="laranja">Laranja</option>
+    </select>
+
+    <input type="submit" value="Cadastrar">
+</form>
 
 <script>
 function validarFormulario() {
@@ -42,32 +46,32 @@ function validarFormulario() {
         alert("Informe a data de nascimento.");
         return false;
     }
-    if (turma <= 0) {
-        alert("Turma deve ser um número positivo.");
-        return false;
-    }
+    // if (turma <= 0) {
+    //     alert("Turma deve ser um número positivo.");
+    //     return false;
+    // }
 
     return true;
 }
 </script>
-
-<form method="POST" onsubmit="return validarFormulario()">
-    <label>CPF:</label>
-    <input type="number" name="cpf" id="cpf" required><br><br>
-
-    <label>Nome:</label>
-    <input type="text" name="nome" id="nome" required><br><br>
-
-    <label>Data de Nascimento:</label>
-    <input type="date" name="data_nascimento" id="data_nascimento" required><br><br>
-
-    <label>Turma:</label>
-    <input type="text" name="turma" id="turma" required><br><br>
-
-    <input type="submit" value="Cadastrar">
-</form>
-
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $dados = [
+        "cpf" => $_POST['cpf'] ?? null,
+        "nome" => $_POST['nome'] ?? null,
+        "data_nasc" => $_POST['data_nascimento'] ?? null
+        // "num_turma" => $_POST['turma'] ?? null
+    ];
+    
+    
+    $resultado = inserirRegistro($conn, "alunos", $dados);
+    
+    if ($resultado === true) {
+        echo "<p>Registro adicionado com sucesso!</p>";
+    } else {
+        echo "<p>$resultado</p>"; // já mostra se for duplicata
+    }
+}
 listarTabela($conn,"alunos");
 include('../inludes/footer.php');
 ?>

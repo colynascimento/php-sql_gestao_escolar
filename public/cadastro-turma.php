@@ -8,11 +8,13 @@ include("../conexao/conexao.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro-Turmas</title>
-    <link rel = "stylesheet" href = "..css/style.css">
+    <link rel = "stylesheet" href = "../css/style.css">
 </head>
 <body>
     <h1>Cadastro de Turmas </h1>
     <form id="cadTurma" method = "POST" action = "">
+        <label>Numero da turma: </label>
+        <input type = "number" id = "num_turma" name = "num_turma" required>
         <label>Nome da turma: </label>
         <input type = "text" id = "nomeTurma" name = "nomeTurma" required>
         <label>Turno: </label>
@@ -24,7 +26,7 @@ include("../conexao/conexao.php");
         </select>
         <label>Sala:</label>
         <input type = "text" id = "sala" name = "sala" required>
-        <button type="submit" name="btnCadTurma" id="btnCadTurma" >Cadastrar</button>
+        <button type="button" name="btnCadTurma" id="btnCadTurma" >Cadastrar</button>
         
         <div id = "msg"></div>
 
@@ -32,7 +34,8 @@ include("../conexao/conexao.php");
 <script>
     // java script depóis modulariza
     document.getElementById("btnCadTurma").onclick = async () =>{
-        const turma = document.getElementById("nomeTurma").value.trim();
+        const num_turma = document.getElementById("num_turma").value.trim();
+        const nomeTurma = document.getElementById("nomeTurma").value.trim();
         const turno = document.getElementById("turno").value.trim();
         const sala = document.getElementById("sala").value.trim();
 
@@ -40,10 +43,11 @@ include("../conexao/conexao.php");
 
     // enviando para PHP
 
-      const resposta = await fetch("api/turma/adicionar_turma.php", {
+      const resposta = await fetch("../api/turma/adicionar.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          num_turma,
           nomeTurma,
           turno,
           sala
@@ -54,6 +58,7 @@ include("../conexao/conexao.php");
 
       if (resultado.sucesso) {
         document.getElementById("msg").innerText = "✅ Turma cadastrada com sucesso!";
+        document.getElementById("num_turma").value = "";
         document.getElementById("nomeTurma").value = "";
         document.getElementById("turno").value = "";
         document.getElementById("sala").value = "";

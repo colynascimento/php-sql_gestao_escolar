@@ -1,31 +1,94 @@
 <?php
 include('../conexao/conexao.php');  // abre a conexão
 include('../inludes/header.php');   // cabeçalho
-include('../api/exibir.php');   // onde está a função listarTabela
+include('../api/exibir.php');
+include('../api/adicionar.php');
 ?>
 
-<form action="" method="POST">
-    <h2>Cadastrar alunos</h2>
+<h2>Cadastrar Aluno</h2>
+<form method="POST" onsubmit="return validarFormulario()">
 
-    <label for="CPF_aluno">CFP do aluno</label>
-    <input type="number" name="CPF_aluno" placeholder="ex:1234567891011" required>
+    <label>CPF:</label>
+    <input type="text" name="cpf" id="cpf" required maxlength="11" placeholder="Somente números"><br><br>
 
-    <label for="nome_aluno">Nome do aluno</label>
-    <input type="string" name="nome_aluno" placeholder="ex:Luiz Inacio Lula da Silva" required>
+    <label>Nome:</label>
+    <input type="text" name="nome" id="nome" required><br><br>
 
-    <label for="data_nascimento">Data de nascimento</label>
-    <input type="date" name="data_nascimento"required>
+    <label>Data de Nascimento:</label>
+    <input type="date" name="data_nascimento" id="data_nascimento" required><br><br>
 
-    <label for="num_turma">Numero da turma</label>
-    <input type="number" name="num_turma" required>
+    <label for="turma">Turma:</label>
+    <input type="text"  id="turma" required><br><br>
+    <input type="submit" value="Cadastrar">
+    <?php
+        // Consulta apenas a tabela turma
+        $sql = "SELECT * FROM turmas";
+        $resultado = $conn->query($sql);
 
+        if ($resultado && $resultado->num_rows > 0) {
+            while ($linha = $resultado->fetch_assoc()) {
+                echo "<option value='" . htmlspecialchars($linha['num_turma']) . "'>" 
+                        . htmlspecialchars($linha['nome_turma']) . "</option>";
+            }
+        } else {
+            echo "<option value=''>Nenhuma turma cadastrada</option>";
+        }
+    ?>
+    
+</form>
 
-    <div id="btn-container">
-        <button type="submit">Mandar formulario</button>
-    </div>
-</form> 
+<script>
+function validarFormulario() {
+    let cpf = document.getElementById("cpf").value;
+    let nome = document.getElementById("nome").value;
+    let nascimento = document.getElementById("data_nascimento").value;
+    let turma = document.getElementById("turma").value;
+
+    // Validação do CPF: 11 dígitos numéricos
+    if (!/^\d{11}$/.test(cpf)) {
+        alert("CPF deve conter exatamente 11 números.");
+        return false;
+    }
+
+    if (nome.trim().length < 3) {
+        alert("Nome deve ter pelo menos 3 caracteres.");
+        return false;
+    }
+
+    if (!nascimento) {
+        alert("Informe a data de nascimento.");
+        return false;
+    }
+
+    if (!turma) {
+        alert("Selecione uma turma.");
+        return false;
+    }
+
+    return true;
+}
+</script>
 
 <?php
-listarTabela($conn,"alunos");  // chamada da função
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $dados = [
+        "cpf" => $_POST['cpf'] ?? null,
+        "nome" => $_POST['nome'] ?? null,
+        "data_nasc" => $_POST['data_nascimento'] ?? null,
+        "num_turma" => $_POST['turma'] ?? null
+    ];
+    
+    $resultado = inserirRegistro($conn, "alunos", $dados);
+    
+    if ($resultado === true) {
+        echo "<p>Registro adicionado com sucesso!</p>";
+    } else {
+        echo "<p>$resultado</p>"; // já mostra se for duplicata ou erro
+    }
+}
+
+// Exibe a tabela de alunos cadastrados
+listarTabela($conn, "alunos");
+
 include('../inludes/footer.php');
 ?>

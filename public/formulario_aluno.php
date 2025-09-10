@@ -1,7 +1,8 @@
 <?php
 include('../conexao/conexao.php');  // abre a conexão
 include('../inludes/header.php');   // cabeçalho
-include('../api/exibir.php');   // onde está a função listarTabela
+include('../api/exibir.php');
+include('../api/adicionar.php');
 ?>
 
 <form action="" method="POST">
@@ -26,6 +27,7 @@ include('../api/exibir.php');   // onde está a função listarTabela
 </form> 
 
 <?php
-listarTabela($conn,"alunos");  // chamada da função
+adicionarTabela($conn, "alunos",$colunas,$valores);
+listarTabela($conn,"alunos");
 include('../inludes/footer.php');
 ?>

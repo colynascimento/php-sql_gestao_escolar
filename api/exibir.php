@@ -2,18 +2,12 @@
 // Inclui o arquivo de conexão com o banco de dados
 include('../conexao/conexao.php');
 
-/**
- * Função para listar registros de qualquer tabela do banco
- * 
- * @param mysqli $conexao - conexão ativa com o banco de dados
- * @param string $nomeTabela - nome da tabela que será exibida
- */
-function listarTabela($conexao, $nomeTabela) {
+function listarTabela($conn, $nomeTabela) {
     // Monta a query SQL para selecionar todos os registros da tabela
-    $sql = "SELECT * FROM $nomeTabela ORDER BY id DESC";
+    $sql = "SELECT * FROM $nomeTabela ";
 
     // Executa a consulta no banco
-    $resultado = $conexao->query($sql);
+    $resultado = $conn->query($sql);
 
     // Verifica se encontrou algum registro
     if ($resultado->num_rows > 0) {
@@ -54,6 +48,4 @@ function listarTabela($conexao, $nomeTabela) {
 // Caso não seja passado nada, define 'usuarios' como padrão
 $tabela = $_GET['tabela'] ?? 'usuarios';
 
-// Chama a função para exibir a tabela escolhida
-listarTabela($conn, $tabela);
 ?>

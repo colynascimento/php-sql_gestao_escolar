@@ -1,5 +1,7 @@
 <?php
 include("../conexao/conexao.php");
+include('../inludes/header.php');   // cabeçalho
+
 ?>
 
 <!DOCTYPE html>
@@ -36,5 +38,4 @@ include("../conexao/conexao.php");
 
 </body>
 </html>
-
 

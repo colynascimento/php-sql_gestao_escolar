@@ -31,44 +31,8 @@ include("../conexao/conexao.php");
         <div id = "msg"></div>
 
     </form>
-<script>
-    // java script depóis modulariza
-    document.getElementById("btnCadTurma").onclick = async () =>{
-        const num_turma = document.getElementById("num_turma").value.trim();
-        const nomeTurma = document.getElementById("nomeTurma").value.trim();
-        const turno = document.getElementById("turno").value.trim();
-        const sala = document.getElementById("sala").value.trim();
+    <script src = "../js/turma.js"></script>
 
-    //ver se vai validar de novo a questão do tipo e campos vazios
-
-    // enviando para PHP
-
-      const resposta = await fetch("../api/turma/adicionar.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          num_turma,
-          nomeTurma,
-          turno,
-          sala
-        })
-      });
-
-      const resultado = await resposta.json();
-
-      if (resultado.sucesso) {
-        document.getElementById("msg").innerText = "✅ Turma cadastrada com sucesso!";
-        document.getElementById("num_turma").value = "";
-        document.getElementById("nomeTurma").value = "";
-        document.getElementById("turno").value = "";
-        document.getElementById("sala").value = "";
-      } else {
-        document.getElementById("msg").innerText = "❌ Erro: " + resultado.erro;
-      }
-    };
-        
-
-</script>
 
 </body>
 </html>

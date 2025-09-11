@@ -1,5 +1,5 @@
 <?php
-// Configuração de conexão
+
 $host = "localhost";  // Servidor do banco
 $user = "root";       // Usuario (Padrão do XAMPP)
 $pass = "";         // Senha (Vazia no XAMPP por padrão)

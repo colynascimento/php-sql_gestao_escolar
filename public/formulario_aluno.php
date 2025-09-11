@@ -19,7 +19,7 @@ include('../api/apagar.php');
     <input type="date" name="data_nascimento" id="data_nascimento" required><br><br>
 
     <label for="turma">Turma:</label>
-    <input type="text"  id="turma" required><br><br>
+    <input type="text"  id="turma"><br><br>
 
     <input type="submit" value="Cadastrar">
 

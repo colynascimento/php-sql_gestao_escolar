@@ -63,7 +63,6 @@ include('../api/apagar.php');
             alert("Informe a data de nascimento.");
             return false;
         }
-        
         return true;
     }
 </script>
@@ -71,11 +70,12 @@ include('../api/apagar.php');
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dados = [
-        "cpf" => $_POST['cpf'] ?? null,
-        "nome" => $_POST['nome'] ?? null,
-        "data_nasc" => $_POST['data_nascimento'] ?? null,
-        "num_turma" => $_POST['turma'] ?? null
+        "cpf"        => $_POST['cpf'] ?? null,
+        "nome"       => $_POST['nome'] ?? null,
+        "data_nasc"  => $_POST['data_nascimento'] ?? null,
+        "num_turma"  => !empty($_POST['turma']) ? $_POST['turma'] : null
     ];
+
     
     $resultado = inserirRegistro($conn, "alunos", $dados);
     

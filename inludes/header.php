@@ -13,10 +13,10 @@
 
         <nav>
             <ul>
-                <li><a href=''>Alunos</a></li>
+                <li><a href='formulario_aluno.php'>Alunos</a></li>
                 <li><a href=''>Disciplinas</a></li>
                 <li><a href=''>Docentes</a></li>
-                <li><a href=''>Turmas</a></li>
+                <li><a href='cadastro-turma.php'>Turmas</a></li>
             </ul>
         </nav>
     </header>

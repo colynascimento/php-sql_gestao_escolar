@@ -1,6 +1,8 @@
 <?php
 include("../conexao/conexao.php");
 include('../inludes/header.php');   // cabeçalho
+include('../api/exibir.php');
+include('../api/apagar.php');
 
 ?>
 
@@ -27,15 +29,22 @@ include('../inludes/header.php');   // cabeçalho
             <option value = "noite">Noite</option>
         </select>
         <label>Sala:</label>
-        <input type = "text" id = "sala" name = "sala" required>
+        <input type = "text" id = "sala" name = "sala" required><br>
         <button type="button" name="btnCadTurma" id="btnCadTurma" >Cadastrar</button>
+        <!-- <button onclick="apagarTurma()">Apagar Turma</button> -->
         
         <div id = "msg"></div>
 
     </form>
     <script src = "../js/turma.js"></script>
-
-
 </body>
 </html>
+
+<?php
+// Exibe a tabela de tumas cadastrados
+listarTabela($conn, "turmas");
+
+include('../inludes/footer.php');
+?>
+
 

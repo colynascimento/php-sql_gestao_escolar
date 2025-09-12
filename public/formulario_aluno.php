@@ -32,7 +32,7 @@ include('../api/apagar.php');
         if ($resultado && $resultado->num_rows > 0) {
             while ($linha = $resultado->fetch_assoc()) {
                 echo "<option value='" . htmlspecialchars($linha['num_turma']) . "'>" 
-                . htmlspecialchars($linha['nome_turma']) . "</option>";
+                . htmlspecialchars($linha['nome']) . "</option>";
             }
         } else {
             echo "<option value=''>Nenhuma turma cadastrada</option>";

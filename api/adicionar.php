@@ -8,7 +8,8 @@ function inserirRegistro($conn, $tabela, $dados) {
     // Verifica se já existe
     $check = $conn->query("SELECT 1 FROM $tabela WHERE cpf = '$cpf'");
     if ($check && $check->num_rows > 0) {
-        return "Erro: já existe um registro com este CPF ($cpf).";
+       return "<span style='color:red;'>Erro: já existe um registro com este CPF ($cpf).</span>";
+
     }
 
     // Monta campos e valores

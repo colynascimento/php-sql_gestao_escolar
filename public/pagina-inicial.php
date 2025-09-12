@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include '../inludes/header.php'; ?>
 
     <section>
         <table>
@@ -42,4 +42,4 @@
         </table>
     </section>
 
-<?php include 'footer.php'; ?>
+<?php include '../inludes/footer.php'; ?>

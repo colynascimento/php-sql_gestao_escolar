@@ -100,6 +100,8 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
     
     font-family: 'Nunito Sans', sans-serif;
     font-size: 16px;
@@ -107,12 +109,17 @@
     background-color: #F9FBFF;
 }
 
+#conteudo-principal {
+    flex: 1;
+}
+
 header {
     color: #fff;
-    background-color: #333;
+    background-color: #1b1b1b;
     height: 70px;
     padding: 0px 30px;
 
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -151,10 +158,21 @@ nav ul li a:hover::after {
     transform: scaleX(1);
 }
 
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
 table {
-  width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate; 
   border-spacing: 0;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 1000px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 tbody th, tbody td {
@@ -170,3 +188,26 @@ tbody tr:nth-child(even) {
 tbody tr:hover {
   background-color: #ddd; /* cor ao passar o mouse */
 }
+
+.cor-tabela1 {
+    background-color: #292DC2;
+    color: #fff;
+}
+
+.cor-tabela2 {
+    background-color: #5F65F6;
+    color: #fff;
+}
+
+.cor-tabela3 {
+    background-color: #8B91FA;
+    color: #fff;
+}
+
+footer {
+      background: #333;
+      color: #fff;
+      padding: 15px;
+      width: 100%;
+      text-align: center;
+    }

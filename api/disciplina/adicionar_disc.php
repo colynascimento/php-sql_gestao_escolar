@@ -1,4 +1,4 @@
-<!-- adicionar turmas -->
+<!-- adicionar disciplinas -->
 <?php
 //define que a resposta do servidor será enviada via JSON
 header("Content-Type: application/json");
@@ -15,14 +15,13 @@ if (!$dados){
     exit;
 }
 //se tudo der certo:
-$num_turma = $conn->real_escape_string($dados["num_turma"]);
-$nomeTurma = $conn->real_escape_string($dados["nomeTurma"]);
-$turno = $conn->real_escape_string($dados["turno"]);
-$sala = $conn->real_escape_string($dados["sala"]);
+$cod_disc = $conn->real_escape_string($dados["cod_disc"]);
+$nomeDisc = $conn->real_escape_string($dados["nomeDisc"]);
+$cargaHora = $conn->real_escape_string($dados["cargaHora"]);
 
-//monta comando sql para inserir a turma na tabela turmas
+//monta comando sql para inserir a disciplina na tabela disciplinas
 
-$sql = "INSERT INTO turmas (num_turma, nome, turno, sala) VALUES ('$num_turma', '$nomeTurma', '$turno', '$sala')";
+$sql = "INSERT INTO disciplinas (cod_disc, nome_disciplina, carga_horaria) VALUES ('$cod_disc', '$nomeDisc', '$cargaHora')";
 
         
 if ($conn->query($sql) === TRUE) {

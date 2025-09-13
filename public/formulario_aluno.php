@@ -28,7 +28,7 @@ include('../api/aluno/adicionarAluno.php');
         if ($resultado && $resultado->num_rows > 0) {
             while ($linha = $resultado->fetch_assoc()) {
                 echo "<option value='" . htmlspecialchars($linha['num_turma']) . "'>"
-                    . htmlspecialchars($linha['num_turma']) . " - " . htmlspecialchars($linha['nome_turma'])
+                    . htmlspecialchars($linha['num_turma']) . "  " . htmlspecialchars($linha['nome_turma'])
                     . "</option>";
             }
         }

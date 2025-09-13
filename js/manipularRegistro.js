@@ -1,33 +1,27 @@
-function adicionarRegistro(formId, url) {
+async function adicionarRegistro(formId, url) {
     const form = document.getElementById(formId);
-    const mensagemDiv = document.getElementById('mensagemStatus');
-    mensagemDiv.innerHTML = '';
-
     const formData = new FormData(form);
-    const dataToSend = {};
 
-    formData.forEach((value, key) => {
-        if (value.trim() !== "") {
-            dataToSend[key] = value.trim(); // envia valor preenchido
-        } else {
-            dataToSend[key] = ""; // envia vazio, PHP tratará como NULL
-        }
-    });
+    try {
+        const resposta = await fetch(url, {
+            method: "POST",
+            body: formData
+        });
 
-    fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(dataToSend)
-    })
-    .then(response => response.text())
-    .then(data => {
-        if (!data) data = "Registro processado com sucesso ou falha no servidor.";
-        mensagemDiv.innerHTML = `<p style="color:${data.toLowerCase().includes('sucesso') ? 'green' : 'red'}">${data}</p>`;
-        if (data.toLowerCase().includes("sucesso")) form.reset();
-    })
-    .catch(error => {
-        mensagemDiv.innerHTML = `<p style="color:red">Erro ao adicionar: ${error}</p>`;
-    });
+        const texto = await resposta.text();
+        mostrarMensagem(texto, "sucesso");
+
+        // recarrega a página para atualizar a tabela
+        setTimeout(() => location.reload(), 1500);
+    } catch (erro) {
+        mostrarMensagem("Erro ao cadastrar aluno: " + erro.message, "erro");
+    }
+}
+
+function mostrarMensagem(msg, tipo) {
+    const div = document.getElementById("mensagemStatus");
+    div.innerHTML = msg;
+    div.style.color = tipo === "erro" ? "red" : "green";
 }
 
 function apagarRegistro(tabela, campoPK) {

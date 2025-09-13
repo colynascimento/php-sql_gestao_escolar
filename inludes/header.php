@@ -14,8 +14,8 @@
         <nav>
             <ul>
                 <li><a href='formulario_aluno.php'>Alunos</a></li>
-                <li><a href=''>Disciplinas</a></li>
-                <li><a href=''>Docentes</a></li>
+                <li><a href='cadastro-disciplina.php'>Disciplinas</a></li>
+                <li><a href='cadastro-professor.php'>Docentes</a></li>
                 <li><a href='cadastro-turma.php'>Turmas</a></li>
             </ul>
         </nav>

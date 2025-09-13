@@ -15,7 +15,7 @@ include('../api/apagar.php');
     <link rel = "stylesheet" href = "../css/style.css">
 </head>
 <body>
-    <h1>Cadastro de Disciplinass </h1>
+    <h1>Cadastro de Disciplinas </h1>
     <form id="cadDisciplina" method = "POST" action = "">
         <label>Código da disciplina: </label>
         <input type = "text" id = "cod_disc" name = "cod_disc" required>

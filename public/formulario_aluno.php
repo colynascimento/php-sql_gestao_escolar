@@ -29,6 +29,7 @@ include('../api/adicionar.php');
             while ($linha = $resultado->fetch_assoc()) {
                 echo "<option value='" . htmlspecialchars($linha['num_turma']) . "'>"
                     . htmlspecialchars($linha['nome_turma']) . "</option>";
+
             }
         }
         ?>

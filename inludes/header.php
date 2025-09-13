@@ -4,11 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestão Escolar</title>
-    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body>
+<body id='pagina-principal'>
     <header>
-        <h1>Gestão Escolar</h1>
+        <h1 id=>Gestão Escolar</h1>
+
+        <nav>
+            <ul>
+                <li><a href='formulario_aluno.php'>Alunos</a></li>
+                <li><a href='cadastro-disciplina.php'>Disciplinas</a></li>
+                <li><a href='cadastro-professor.php'>Docentes</a></li>
+                <li><a href='cadastro-turma.php'>Turmas</a></li>
+            </ul>
+        </nav>
     </header>
-    <main>
+    <main id='conteudo-principal'>

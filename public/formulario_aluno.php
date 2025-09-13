@@ -2,13 +2,13 @@
 include('../conexao/conexao.php');  // abre a conexão
 include('../inludes/header.php');   // cabeçalho
 include('../api/exibir.php');
-include('../api/adicionar.php');
+include('../api/aluno/adicionarAluno.php');
 ?>
 <script src="../js/validarFormulario.js"></script>
 <script src="../js/manipularRegistro.js"></script>
 
 <h2>Cadastrar Aluno</h2>
-<form id="formAluno" method="POST">
+<form id="formAluno" method="POST" action="../api/adicionar.php">
 
     <label>CPF:</label>
     <input type="text" name="cpf" id="cpf" required maxlength="11" placeholder="Somente números"><br><br>
@@ -19,8 +19,8 @@ include('../api/adicionar.php');
     <label>Data de Nascimento:</label>
     <input type="date" name="data_nascimento" id="data_nascimento" required><br><br>
     
-    <label for="turma">Turma:</label>
-    <select name="turma" id="turma">
+    <label for="num_turma">Turma:</label>
+    <select name="num_turma" id="num_turma" required>
         <option value="">Selecione a turma</option>
         <?php
         $sql = "SELECT * FROM turmas";
@@ -28,25 +28,24 @@ include('../api/adicionar.php');
         if ($resultado && $resultado->num_rows > 0) {
             while ($linha = $resultado->fetch_assoc()) {
                 echo "<option value='" . htmlspecialchars($linha['num_turma']) . "'>"
-                    . htmlspecialchars($linha['nome_turma']) . "</option>";
-
+                    . htmlspecialchars($linha['num_turma']) . " - " . htmlspecialchars($linha['nome_turma'])
+                    . "</option>";
             }
         }
         ?>
-    </select>
-
     </select><br><br>
+
     <input type="submit" value="Cadastrar">
     <button type="button" id="apagarDado">Apagar</button>
 
 </form>
+
 <!-- div para mostrar mensagens -->
 <div id="mensagemStatus"></div>
 
 <script>
     const form = document.getElementById('formAluno');
 
-    // Validação e envio genérico
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // previne envio padrão
         if (validarFormularioAluno('formAluno')) {
@@ -55,8 +54,9 @@ include('../api/adicionar.php');
     });
 
     document.getElementById('apagarDado')
-            .addEventListener('click', () => apagarRegistro('alunos', 'cpf'));
+        .addEventListener('click', () => apagarRegistro('alunos', 'cpf'));
 </script>
+
 <?php
 // Exibe a tabela de alunos cadastrados
 listarTabela($conn, "alunos");

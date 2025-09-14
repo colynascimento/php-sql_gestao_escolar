@@ -1,25 +1,40 @@
 <?php
 include('../conexao/conexao.php');
 
-function inserirRegistro($conn, $tabela, $coluna, $PK, $dados) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Verifica se já existe
-    $check = $conn->query("SELECT 1 FROM $tabela WHERE $coluna = $PK");
+    $cpf = $_POST['cpf'] ?? '';
+    $nome = $_POST['nome'] ?? '';
+    $data_nascimento = $_POST['data_nascimento'] ?? '';
+    $num_turma = $_POST['num_turma'] ?? '';
 
-    if ($check && $check->num_rows > 0) {
-        return "<span style='color:red;'>Erro: já existe um registro com este valor ($PK).</span>";
+    if (!$cpf || !$nome || !$data_nascimento || !$num_turma) {
+        echo "Erro: Todos os campos são obrigatórios.";
+        exit;
     }
 
-    // Monta campos e valores
-    $campos = implode(", ", array_keys($dados));
-    $valores = implode("', '", array_map([$conn, 'real_escape_string'], array_values($dados)));
+    // Verifica se o CPF já existe
+    $check = $conn->prepare("SELECT cpf FROM alunos WHERE cpf = ?");
+    $check->bind_param("s", $cpf);
+    $check->execute();
+    $check->store_result();
 
-    $sql = "INSERT INTO $tabela ($campos) VALUES ('$valores')";
+    if ($check->num_rows > 0) {
+        echo "Erro: Já existe um aluno com este CPF.";
+        exit;
+    }
 
-    if ($conn->query($sql) === TRUE) {
-        return true;
+    // Inserção segura
+    $stmt = $conn->prepare("INSERT INTO alunos (cpf, nome, data_nascimento, num_turma) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $cpf, $nome, $data_nascimento, $num_turma);
+
+    if ($stmt->execute()) {
+        echo "Aluno cadastrado com sucesso!";
     } else {
-        return "Erro SQL: " . $conn->error;
+        echo "Erro ao cadastrar aluno: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>

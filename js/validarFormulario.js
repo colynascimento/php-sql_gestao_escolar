@@ -1,9 +1,16 @@
 function validarFormularioAluno(formId) {
-    const form = document.getElementById(formId);
-    const cpf = form.querySelector("[name='cpf']").value.trim();
-    const nome = form.querySelector("[name='nome']").value.trim();
-    const nascimento = form.querySelector("[name='data_nascimento']").value.trim();
-    const turma = form.querySelector("[name='turma']").value;
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("formAluno");
+    const cpf = document.getElementById("cpf");
+    const nome = document.getElementById("nome");
+    const turma = document.getElementById("num_turma");
+
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+        console.log("Tentando enviar formulário...");
+        console.log("CPF:", cpf.value);  // agora não dará erro
+        console.log("Nome:", nome.value);
+        console.log("Turma:", turma.value);
 
     if (!/^\d{11}$/.test(cpf)) {
         mostrarMensagem("CPF deve conter exatamente 11 números.", "erro");
@@ -26,4 +33,7 @@ function validarFormularioAluno(formId) {
     }
 
     return true;
+    })
+})
 }
+

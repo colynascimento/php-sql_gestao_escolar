@@ -2,13 +2,11 @@
 include('../conexao/conexao.php');  // abre a conexão
 include('../inludes/header.php');   // cabeçalho
 include('../api/exibir.php');
-include('../api/aluno/adicionarAluno.php');
+include("../api/aluno/adicionarAluno.php");
 ?>
-<script src="../js/validarFormulario.js"></script>
-<script src="../js/manipularRegistro.js"></script>
 
 <h2>Cadastrar Aluno</h2>
-<form id="formAluno" method="POST" action="../api/adicionar.php">
+<form id="formAluno" method="POST">
 
     <label>CPF:</label>
     <input type="text" name="cpf" id="cpf" required maxlength="11" placeholder="Somente números"><br><br>
@@ -28,7 +26,7 @@ include('../api/aluno/adicionarAluno.php');
         if ($resultado && $resultado->num_rows > 0) {
             while ($linha = $resultado->fetch_assoc()) {
                 echo "<option value='" . htmlspecialchars($linha['num_turma']) . "'>"
-                    . htmlspecialchars($linha['num_turma']) . "  " . htmlspecialchars($linha['nome_turma'])
+                    . htmlspecialchars($linha['num_turma']) . "" . htmlspecialchars($linha['nome_turma'])
                     . "</option>";
             }
         }
@@ -36,9 +34,12 @@ include('../api/aluno/adicionarAluno.php');
     </select><br><br>
 
     <input type="submit" value="Cadastrar">
-    <button type="button" id="apagarDado">Apagar</button>
-
 </form>
+
+<div id="mensagemStatus"></div>
+
+<script src="../js/validarFormulario.js"></script>
+<script src="../js/manipularRegistro.js"></script>
 
 <!-- div para mostrar mensagens -->
 <div id="mensagemStatus"></div>
@@ -49,7 +50,7 @@ include('../api/aluno/adicionarAluno.php');
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // previne envio padrão
         if (validarFormularioAluno('formAluno')) {
-            adicionarRegistro('formAluno', '../api/adicionar.php');
+            adicionarRegistro('formAluno', "../api/aluno/adicionarAluno.php");
         }
     });
 

@@ -1,4 +1,4 @@
-// Exibe mensagens no HTML
+// ================================ Exibe mensagens no HTML ================================
 function mostrarMensagem(texto, tipo) {
     const div = document.getElementById('mensagem');
     if (!div) return;
@@ -6,7 +6,7 @@ function mostrarMensagem(texto, tipo) {
     div.style.color = tipo === "sucesso" ? "green" : "red";
 }
 
-// Adiciona ou edita aluno
+// ================================ Adiciona ou edita aluno ================================
 async function salvarAluno(formId, url, callback = null) {
     const form = document.getElementById(formId);
     if (!form) return mostrarMensagem("Formulário não encontrado!", "erro");
@@ -27,32 +27,33 @@ async function salvarAluno(formId, url, callback = null) {
     }
 }
 
-// Atualiza tabela de alunos
+// ================================ Atualiza tabela de alunos ================================
 async function atualizarTabelaAlunos() {
-    console.log('Chegou na função') // Log para indicar que a função foi chamada
+    console.log('Chegou na função atualizarTabelaAlunos') // Log para indicar que a função foi chamada
 
     try {
-        // Faz uma requisição assíncrona para o backend (PHP) que retorna a lista de alunos em JSON
         const resp = await fetch('/php-sql_gestao_escolar/api/aluno/listarAlunos.php');
-        
-        // Converte a resposta da requisição para um objeto JavaScript
-        const alunos = await resp.json();
-        console.log(alunos)
+        const texto = await resp.text(); // lê o corpo como texto
+        console.log("Resposta bruta do PHP:", texto);
+
+        // Converte manualmente o texto para JSON
+        const alunos = JSON.parse(texto); 
+        console.log(alunos);
+
 
         // Seleciona o corpo da tabela onde os dados dos alunos serão exibidos
         const tbody = document.querySelector('#tabelaAlunos tbody');
-        
         // Limpa qualquer conteúdo anterior da tabela, para evitar duplicações
         tbody.innerHTML = '';
 
         // Itera sobre cada aluno retornado do backend
         alunos.forEach(aluno => {
-            console.log('Print aluno') // Log para cada aluno encontrado
-
+            
             // Cria uma nova linha da tabela
             const tr = document.createElement('tr');
-
+            
             // Define as colunas da linha com os dados do aluno e botões de ação
+            console.log('Print aluno') // Log para cada aluno encontrado
             tr.innerHTML =
             `
                 <td>${aluno.cpf}</td> <!-- Exibe o CPF -->
@@ -67,20 +68,19 @@ async function atualizarTabelaAlunos() {
                     <button onclick="apagarAluno('${aluno.cpf}')">Apagar</button>
                 </td>
             `;
-
             // Adiciona a linha criada dentro do corpo da tabela
             tbody.appendChild(tr);
         });
     } catch (erro) {
+        console.log('Rodando mensagem de erro')
         // Caso haja erro na requisição ou processamento, exibe mensagem ao usuário
         mostrarMensagem("Erro ao carregar alunos", "erro");
     }
 
-    console.log('Passou pela função') // Log indicando que a função foi concluída
+    console.log('Passou pela função atualizarTabelaAlunos') // Log indicando que a função foi concluída
 }
 
-
-// Apaga aluno
+// ================================ Apaga aluno ================================
 async function apagarAluno(cpf) {
     if (!confirm(`Deseja apagar o aluno ${cpf}?`)) return;
     const formData = new FormData();
@@ -96,7 +96,7 @@ async function apagarAluno(cpf) {
     }
 }
 
-// Preenche formulário para edição
+// ================================ Preenche formulário para edição ================================
 async function editarAluno(cpf) {
     try {
         const resp = await fetch(`/php-sql_gestao_escolar/api/aluno/buscarAluno.php?cpf=${cpf}`);

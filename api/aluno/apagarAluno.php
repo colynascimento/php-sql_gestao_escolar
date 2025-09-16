@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 0);
-error_reporting(0);
-include('../conexao/conexao.php');
+include('../../conexao/conexao.php');
 
 header('Content-Type: text/plain');
 
@@ -24,3 +22,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt->close();
     $conn->close();
+}

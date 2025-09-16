@@ -1,6 +1,4 @@
-<?php
-include("../inludes/header.php")
-?>
+<?php include("../inludes/header.php")?>
 
 <form id="formAluno">
     <label>CPF:</label>
@@ -29,7 +27,9 @@ include("../inludes/header.php")
             <th>Ações</th>
         </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+        
+    </tbody>
 </table>
 
 <div id="mensagem"></div>
@@ -41,8 +41,6 @@ document.getElementById('formAluno').addEventListener('submit', e => {
     salvarAluno('formAluno', '/php-sql_gestao_escolar/api/aluno/adicionarAluno.php', atualizarTabelaAlunos);
 });
 
-// Carrega a tabela ao abrir a página
-atualizarTabelaAlunos();
 </script>
 
 <?php

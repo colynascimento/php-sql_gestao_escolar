@@ -1,66 +1,42 @@
-<?php
-include('../conexao/conexao.php');  // abre a conexão
-include('../inludes/header.php');   // cabeçalho
-include('../api/exibir.php');
-include("../api/aluno/adicionarAluno.php");
-?>
-
-<h2>Cadastrar Aluno</h2>
-<form id="formAluno" method="POST">
-
+<form id="formAluno">
     <label>CPF:</label>
-    <input type="text" name="cpf" id="cpf" required maxlength="11" placeholder="Somente números"><br><br>
+    <input type="text" name="cpf" required>
 
     <label>Nome:</label>
-    <input type="text" name="nome" id="nome" required><br><br>
+    <input type="text" name="nome" required>
 
-    <label>Data de Nascimento:</label>
-    <input type="date" name="data_nascimento" id="data_nascimento" required><br><br>
-    
-    <label for="num_turma">Turma:</label>
-    <select name="num_turma" id="num_turma" required>
-        <option value="">Selecione a turma</option>
-        <?php
-        $sql = "SELECT * FROM turmas";
-        $resultado = $conn->query($sql);
-        if ($resultado && $resultado->num_rows > 0) {
-            while ($linha = $resultado->fetch_assoc()) {
-                echo "<option value='" . htmlspecialchars($linha['num_turma']) . "'>"
-                    . htmlspecialchars($linha['num_turma']) . "" . htmlspecialchars($linha['nome_turma'])
-                    . "</option>";
-            }
-        }
-        ?>
-    </select><br><br>
+    <label>Data Nascimento:</label>
+    <input type="date" name="data_nasc" required>
 
-    <input type="submit" value="Cadastrar">
+    <label>Turma:</label>
+    <input type="number" name="num_turma" required min="1">
+
+    <button type="submit">Cadastrar Aluno</button>
 </form>
 
-<div id="mensagemStatus"></div>
+<h2>Lista de Alunos</h2>
+<table id="tabelaAlunos" border="1">
+    <thead>
+        <tr>
+            <th>CPF</th>
+            <th>Nome</th>
+            <th>Data Nascimento</th>
+            <th>Turma</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
-<script src="../js/validarFormulario.js"></script>
+<div id="mensagem"></div>
+
 <script src="../js/manipularRegistro.js"></script>
-
-<!-- div para mostrar mensagens -->
-<div id="mensagemStatus"></div>
-
 <script>
-    const form = document.getElementById('formAluno');
+document.getElementById('formAluno').addEventListener('submit', e => {
+    e.preventDefault();
+    salvarAluno('formAluno', '/php-sql_gestao_escolar/api/aluno/adicionarAluno.php', atualizarTabelaAlunos);
+});
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); // previne envio padrão
-        if (validarFormularioAluno('formAluno')) {
-            adicionarRegistro('formAluno', "../api/aluno/adicionarAluno.php");
-        }
-    });
-
-    document.getElementById('apagarDado')
-        .addEventListener('click', () => apagarRegistro('alunos', 'cpf'));
+// Carrega a tabela ao abrir a página
+atualizarTabelaAlunos();
 </script>
-
-<?php
-// Exibe a tabela de alunos cadastrados
-listarTabela($conn, "alunos");
-
-include('../inludes/footer.php');
-?>

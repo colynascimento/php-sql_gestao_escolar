@@ -1,19 +1,24 @@
 <?php
-include('../conexao/conexao.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include('../../conexao/conexao.php');
+
+
+header('Content-Type: text/plain');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     $cpf = $_POST['cpf'] ?? '';
     $nome = $_POST['nome'] ?? '';
-    $data_nascimento = $_POST['data_nascimento'] ?? '';
+    $data_nasc = $_POST['data_nasc'] ?? '';
     $num_turma = $_POST['num_turma'] ?? '';
 
-    if (!$cpf || !$nome || !$data_nascimento || !$num_turma) {
+    if (!$cpf || !$nome || !$data_nasc || !$num_turma) {
         echo "Erro: Todos os campos são obrigatórios.";
         exit;
     }
 
-    // Verifica se o CPF já existe
     $check = $conn->prepare("SELECT cpf FROM alunos WHERE cpf = ?");
     $check->bind_param("s", $cpf);
     $check->execute();
@@ -24,17 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Inserção segura
-    $stmt = $conn->prepare("INSERT INTO alunos (cpf, nome, data_nascimento, num_turma) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $cpf, $nome, $data_nascimento, $num_turma);
+    $stmt = $conn->prepare("INSERT INTO alunos (cpf, nome, data_nasc, num_turma) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $cpf, $nome, $data_nasc, $num_turma);
 
     if ($stmt->execute()) {
         echo "Aluno cadastrado com sucesso!";
     } else {
         echo "Erro ao cadastrar aluno: " . $stmt->error;
     }
-
     $stmt->close();
     $conn->close();
 }
-?>

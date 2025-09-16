@@ -1,39 +1,28 @@
 function validarFormularioAluno(formId) {
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById("formAluno");
-    const cpf = document.getElementById("cpf");
-    const nome = document.getElementById("nome");
-    const turma = document.getElementById("num_turma");
+    console.log("Função validarFormularioAluno chamada");
 
-    form.addEventListener("submit", function(e){
-        e.preventDefault();
-        console.log("Tentando enviar formulário...");
-        console.log("CPF:", cpf.value);  // agora não dará erro
-        console.log("Nome:", nome.value);
-        console.log("Turma:", turma.value);
-
-    if (!/^\d{11}$/.test(cpf)) {
-        mostrarMensagem("CPF deve conter exatamente 11 números.", "erro");
+    const form = document.getElementById(formId);
+    if (!form) {
+        console.log("Formulário não encontrado");
         return false;
     }
 
-    if (nome.length < 3) {
-        mostrarMensagem("Nome deve ter pelo menos 3 caracteres.", "erro");
+    const cpf = form.querySelector('#cpf').value.trim();
+    const nome = form.querySelector('#nome').value.trim();
+    const dataNascimento = form.querySelector('#data_nascimento').value.trim();
+    const turma = form.querySelector('#num_turma').value.trim();
+
+    console.log("Valores capturados:", { cpf, nome, dataNascimento, turma });
+
+    if (!cpf || !nome || !dataNascimento || !turma) {
+        alert("Todos os campos são obrigatórios!");
         return false;
     }
 
-    if (!nascimento) {
-        mostrarMensagem("Informe a data de nascimento.", "erro");
+    if (cpf.length !== 11 || isNaN(cpf)) {
+        alert("CPF deve conter 11 números.");
         return false;
     }
 
-    if (!turma) {
-        mostrarMensagem("Selecione uma turma para o aluno.", "erro");
-        return false;
-    }
-
-    return true;
-    })
-})
+    return true; // passou na validação
 }
-

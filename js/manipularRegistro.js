@@ -29,30 +29,56 @@ async function salvarAluno(formId, url, callback = null) {
 
 // Atualiza tabela de alunos
 async function atualizarTabelaAlunos() {
+    console.log('Chegou na função') // Log para indicar que a função foi chamada
+
     try {
+        // Faz uma requisição assíncrona para o backend (PHP) que retorna a lista de alunos em JSON
         const resp = await fetch('/php-sql_gestao_escolar/api/aluno/listarAlunos.php');
+        
+        // Converte a resposta da requisição para um objeto JavaScript
         const alunos = await resp.json();
+        console.log(alunos)
+
+        // Seleciona o corpo da tabela onde os dados dos alunos serão exibidos
         const tbody = document.querySelector('#tabelaAlunos tbody');
+        
+        // Limpa qualquer conteúdo anterior da tabela, para evitar duplicações
         tbody.innerHTML = '';
 
+        // Itera sobre cada aluno retornado do backend
         alunos.forEach(aluno => {
+            console.log('Print aluno') // Log para cada aluno encontrado
+
+            // Cria uma nova linha da tabela
             const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${aluno.cpf}</td>
-                <td>${aluno.nome}</td>
-                <td>${aluno.data_nascimento}</td>
-                <td>${aluno.num_turma}</td>
+
+            // Define as colunas da linha com os dados do aluno e botões de ação
+            tr.innerHTML =
+            `
+                <td>${aluno.cpf}</td> <!-- Exibe o CPF -->
+                <td>${aluno.nome}</td> <!-- Exibe o Nome -->
+                <td>${aluno.data_nasc}</td> <!-- Exibe a Data de Nascimento -->
+                <td>${aluno.num_turma}</td> <!-- Exibe a Turma -->
                 <td>
+                    <!-- Botão para editar o aluno, chamando a função editarAluno -->
                     <button onclick="editarAluno('${aluno.cpf}')">Editar</button>
+
+                    <!-- Botão para apagar o aluno, chamando a função apagarAluno -->
                     <button onclick="apagarAluno('${aluno.cpf}')">Apagar</button>
                 </td>
             `;
+
+            // Adiciona a linha criada dentro do corpo da tabela
             tbody.appendChild(tr);
         });
     } catch (erro) {
+        // Caso haja erro na requisição ou processamento, exibe mensagem ao usuário
         mostrarMensagem("Erro ao carregar alunos", "erro");
     }
+
+    console.log('Passou pela função') // Log indicando que a função foi concluída
 }
+
 
 // Apaga aluno
 async function apagarAluno(cpf) {

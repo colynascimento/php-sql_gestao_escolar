@@ -1,3 +1,7 @@
+<?php
+include("../inludes/header.php")
+?>
+
 <form id="formAluno">
     <label>CPF:</label>
     <input type="text" name="cpf" required>
@@ -40,3 +44,7 @@ document.getElementById('formAluno').addEventListener('submit', e => {
 // Carrega a tabela ao abrir a página
 atualizarTabelaAlunos();
 </script>
+
+<?php
+include("../inludes/footer.php")
+?>

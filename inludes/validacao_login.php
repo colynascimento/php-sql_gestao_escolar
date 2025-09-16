@@ -15,7 +15,7 @@
 
     if ($login_valido) {
         // redirecionar para página inicial do sistema de gestão
-        header('Location: ../inludes/pagina-inicial.php');
+        header('Location: ../public/pagina-inicial.php');
         exit();
     } else {
         alert('Usuário os senha incorretos!', '../public/index.php');

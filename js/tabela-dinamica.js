@@ -1,17 +1,6 @@
-async function carregarTabela() {
-    const response = await fetch('../inludes/carrega_tabela.php');
-    const html = await response.text();
-    document.getElementById('container-tabela').innerHTML = html;
-
-    const tbody = document.querySelector('#container-tabela table tbody');
-    if (tbody) {
-      tbody.id = "corpo-tabela-principal";
-    }
-}
-
-async function alternarTabela() {
-    const tbody = document.getElementById('corpo-tabela-principal');
-    const btn = document.getElementById('exibir-ocultar-tabela');
+async function alternarTabela(btn) {
+    const tabela = btn.closest('table');
+    const tbody = tabela.querySelector('tbody');
 
     if (!tbody) return; 
 
@@ -24,8 +13,7 @@ async function alternarTabela() {
     }
 }
 
-document.getElementById('exibir-ocultar-tabela')
-        .addEventListener('click', alternarTabela);
-
-
-carregarTabela();
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('exibir-ocultar-tabela');
+    if (btn) btn.addEventListener('click', alternarTabela(btn));
+});

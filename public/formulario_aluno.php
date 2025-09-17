@@ -6,11 +6,11 @@
     <!-- Campo para CPF (11 caracteres fixos) -->
     <label>CPF:</label>
     <input type="text" name="cpf" minlength="11" maxlength="11" required>
-
+    
     <!-- Campo para Nome (mínimo 3 letras) -->
     <label>Nome:</label>
     <input type="text" name="nome" minlength="3" required>
-
+    
     <!-- Campo para Data de Nascimento, com limites definidos -->
     <label>Data Nascimento:</label>
     <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
@@ -24,7 +24,7 @@
         if ($conn) {
             $sql = "SELECT num_turma, nome, turno, sala FROM turmas";
             $result = $conn->query($sql);
-
+            
             // Se houver resultados, gera cada <option>
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -38,10 +38,12 @@
         }
         ?>
     </select>
-
+    
     <!-- Botão para enviar o formulário (cadastrar aluno) -->
     <button type="submit">Cadastrar Aluno</button>
 </form>
+<!-- Div para exibir mensagens (sucesso, erro, etc.) -->
+<div id="mensagem"></div>
 
 <!-- ================================ Formulario para editar o aluno ================================ -->
 <!-- Por padrão, fica escondido (display:none) -->
@@ -100,8 +102,6 @@
     </tbody>
 </table>
 
-<!-- Div para exibir mensagens (sucesso, erro, etc.) -->
-<div id="mensagem"></div>
 
 <!-- Script de manipulação de registros (CRUD via AJAX/Fetch) -->
 <script src="../js/manipularRegistro.js"></script>

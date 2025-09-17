@@ -1,106 +1,105 @@
 // ================================ Exibe mensagens no HTML ================================
+// Função que mostra uma mensagem na div #mensagem
+// 'texto' é o conteúdo da mensagem, 'tipo' define a cor: sucesso (verde) ou erro (vermelho)
 function mostrarMensagem(texto, tipo) {
     const div = document.getElementById('mensagem');
-    if (!div) return;
+    if (!div) return; // Se a div não existir, não faz nada
     div.textContent = texto;
     div.style.color = tipo === "sucesso" ? "green" : "red";
 }
 
 // ================================ Adiciona ================================
+// Função para cadastrar um aluno via AJAX
 async function salvarAluno(formId, url, callback = null) {
-    console.log('Chegou na função salvarAluno') // Log para indicar que a função foi chamada
+    console.log('Chegou na função salvarAluno'); // Log para indicar chamada da função
 
     const form = document.getElementById(formId);
     if (!form) return mostrarMensagem("Formulário não encontrado!", "erro");
 
-    const formData = new FormData(form);
+    const formData = new FormData(form); // Captura os dados do formulário
 
     try {
+        // Envia os dados via POST para o backend
         const resposta = await fetch(url, { method: "POST", body: formData });
         const texto = await resposta.text();
+        
+        // Mostra mensagem de sucesso ou erro dependendo do retorno
         mostrarMensagem(texto, texto.toLowerCase().includes("erro") ? "erro" : "sucesso");
 
         if (!texto.toLowerCase().includes("erro")) {
-            form.reset();
-            if (callback) callback();
+            form.reset(); // Limpa o formulário após sucesso
+            if (callback) callback(); // Chama função de callback se fornecida (ex.: atualizar tabela)
         }
     } catch (erro) {
-        mostrarMensagem("Erro: " + erro.message, "erro");
+        mostrarMensagem("Erro: " + erro.message, "erro"); // Captura erro de requisição
     }
     
-    console.log('Passou pela função salvarAluno') // Log indicando que a função foi concluída
+    console.log('Passou pela função salvarAluno'); // Log indicando conclusão
 }
 
 // ================================ Atualiza tabela de alunos ================================
+// Função para buscar os alunos do backend e preencher a tabela HTML
 async function atualizarTabelaAlunos() {
-    console.log('Chegou na função atualizarTabelaAlunos') // Log para indicar que a função foi chamada
+    console.log('Chegou na função atualizarTabelaAlunos');
 
     try {
         const resp = await fetch('/php-sql_gestao_escolar/api/aluno/listarAlunos.php');
-        const texto = await resp.text(); // lê o corpo como texto
+        const texto = await resp.text(); // Lê o corpo da resposta como texto
         console.log("Resposta bruta do PHP:", texto);
 
-        // Converte manualmente o texto para JSON
-        const alunos = JSON.parse(texto); 
+        const alunos = JSON.parse(texto); // Converte o texto em JSON
         console.log(alunos);
 
-
-        // Seleciona o corpo da tabela onde os dados dos alunos serão exibidos
+        // Seleciona o tbody da tabela e limpa conteúdo antigo
         const tbody = document.querySelector('#tabelaAlunos tbody');
-        // Limpa qualquer conteúdo anterior da tabela, para evitar duplicações
         tbody.innerHTML = '';
 
-        // Itera sobre cada aluno retornado do backend
+        // Itera sobre cada aluno retornado e cria linhas na tabela
         alunos.forEach(aluno => {
-            
-            // Cria uma nova linha da tabela
             const tr = document.createElement('tr');
-            
-            // Define as colunas da linha com os dados do aluno e botões de ação
-            console.log('Print aluno') // Log para cada aluno encontrado
-            tr.innerHTML =
-            `
-                <td>${aluno.cpf}</td> <!-- Exibe o CPF -->
-                <td>${aluno.nome}</td> <!-- Exibe o Nome -->
-                <td>${aluno.data_nasc}</td> <!-- Exibe a Data de Nascimento -->
-                <td>${aluno.num_turma}</td> <!-- Exibe a Turma -->
-                <td>
-                    <!-- Botão para editar o aluno, chamando a função editarAluno -->
-                    <button onclick="editarAluno('${aluno.cpf}')">Editar</button>
+            console.log('Print aluno');
 
-                    <!-- Botão para apagar o aluno, chamando a função apagarAluno -->
+            tr.innerHTML = `
+                <td>${aluno.cpf}</td> <!-- CPF do aluno -->
+                <td>${aluno.nome}</td> <!-- Nome do aluno -->
+                <td>${aluno.data_nasc}</td> <!-- Data de nascimento -->
+                <td>${aluno.num_turma}</td> <!-- Número da turma -->
+                <td>
+                    <!-- Botão para editar -->
+                    <button onclick="editarAluno('${aluno.cpf}')">Editar</button>
+                    <!-- Botão para apagar -->
                     <button onclick="apagarAluno('${aluno.cpf}')">Apagar</button>
                 </td>
             `;
-            // Adiciona a linha criada dentro do corpo da tabela
-            tbody.appendChild(tr);
+            tbody.appendChild(tr); // Adiciona a linha à tabela
         });
     } catch (erro) {
-        console.log('Rodando mensagem de erro')
-        // Caso haja erro na requisição ou processamento, exibe mensagem ao usuário
-        mostrarMensagem("Erro ao carregar alunos", "erro");
+        console.log('Rodando mensagem de erro');
+        mostrarMensagem("Erro ao carregar alunos", "erro"); // Mostra erro se algo falhar
     }
 
-    console.log('Passou pela função atualizarTabelaAlunos') // Log indicando que a função foi concluída
+    console.log('Passou pela função atualizarTabelaAlunos'); // Indica conclusão
 }
 
 // ================================ Apaga aluno ================================
+// Função para apagar aluno do banco
 async function apagarAluno(cpf) {
-    if (!confirm(`Deseja apagar o aluno ${cpf}?`)) return;
+    if (!confirm(`Deseja apagar o aluno ${cpf}?`)) return; // Confirmação com o usuário
     const formData = new FormData();
-    formData.append('cpf', cpf);
+    formData.append('cpf', cpf); // Adiciona o CPF ao formData
 
     try {
         const resp = await fetch('/php-sql_gestao_escolar/api/aluno/apagarAluno.php', { method: "POST", body: formData });
         const texto = await resp.text();
         mostrarMensagem(texto, texto.toLowerCase().includes("erro") ? "erro" : "sucesso");
-        atualizarTabelaAlunos();
+        atualizarTabelaAlunos(); // Atualiza a tabela após apagar
     } catch (erro) {
         mostrarMensagem("Erro ao apagar: " + erro.message, "erro");
     }
 }
 
 // ================================ Editar ================================
+// Função para salvar alterações de um aluno já existente
 async function salvarEdicao() {
     const form = document.querySelector('#formEditarAluno');
 
@@ -122,8 +121,8 @@ async function salvarEdicao() {
 
         if (resultado.sucesso) {
             mostrarMensagem("Aluno atualizado com sucesso!", "sucesso");
-            form.style.display = 'none';
-            atualizarTabelaAlunos(); // atualiza tabela com dados novos
+            form.style.display = 'none'; // Oculta o formulário após salvar
+            atualizarTabelaAlunos(); // Atualiza tabela com dados novos
         } else {
             mostrarMensagem("Erro ao atualizar aluno: " + resultado.erro, "erro");
         }
@@ -133,15 +132,17 @@ async function salvarEdicao() {
 }
 
 // ================================ Preenche formulário para edição ================================
+// Função para preencher o formulário de edição com os dados do aluno selecionado
 async function editarAluno(cpf) {
     try {
         const resp = await fetch(`/php-sql_gestao_escolar/api/aluno/buscarAluno.php?cpf=${cpf}`);
         const aluno = await resp.json();
-        const dados = Array.isArray(aluno) ? aluno[0] : aluno;
+        const dados = Array.isArray(aluno) ? aluno[0] : aluno; // Se retornar array, pega o primeiro item
 
         const form = document.querySelector('#formEditarAluno');
-        form.style.display = 'block'; // mostra o formulário
+        form.style.display = 'block'; // Mostra o formulário
 
+        // Preenche os campos com os dados do aluno
         form.cpf.value = dados.cpf || '';
         form.nome.value = dados.nome || '';
         form.data_nasc.value = dados.data_nasc || '';
@@ -151,13 +152,14 @@ async function editarAluno(cpf) {
     }
 }
 
-// Botão cancelar
+// ================================ Cancelar edição ================================
+// Função para cancelar edição, limpa e oculta o formulário
 function cancelarEdicao() {
     const form = document.querySelector('#formEditarAluno');
     form.style.display = 'none';
     form.reset();
 }
 
-
-// Inicializa tabela ao carregar página
+// ================================ Inicialização ================================
+// Atualiza a tabela automaticamente ao carregar a página
 document.addEventListener('DOMContentLoaded', atualizarTabelaAlunos);

@@ -14,7 +14,7 @@
     }
 
     if ($login_valido) {
-        header("Location: pagina-inicial.php");
+        header("Location: ../public/pagina-inicial.php");
         exit();
     } else {
         alert('Usuário os senha incorretos!', '../public/index.php');

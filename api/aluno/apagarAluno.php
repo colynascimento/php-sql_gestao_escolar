@@ -1,10 +1,13 @@
 <?php
-ini_set('display_errors', 0);
-error_reporting(0);
-include('../conexao/conexao.php');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+include('../../conexao/conexao.php');
 
 header('Content-Type: text/plain');
 
+if (!$conn) {
+    die("Erro: Conexão com o banco não foi estabelecida!");
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cpf = $_POST['cpf'] ?? '';
 
@@ -24,3 +27,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt->close();
     $conn->close();
+}

@@ -1,5 +1,12 @@
 <?php
-include("../inludes/header.php")
+include("../conexao/conexao.php");
+include('../inludes/header.php');   // cabeçalho
+//include('../inludes/usuarios.php');  
+//include('../api/exibir.php');
+//include('../api/aluno/apagarAluno.php');
+//include('../api/aluno/listarAlunos.php');
+//include('../api/aluno/adicionarAluno.php');
+
 ?>
 
 <form id="formAluno">

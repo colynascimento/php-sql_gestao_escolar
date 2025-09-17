@@ -85,7 +85,7 @@ async function apagarAluno(cpf) {
     if (!confirm(`Deseja apagar o aluno ${cpf}?`)) return;
     const formData = new FormData();
     formData.append('cpf', cpf);
-
+   // console.log(cpf);
     try {
         const resp = await fetch('/php-sql_gestao_escolar/api/aluno/apagarAluno.php', { method: "POST", body: formData });
         const texto = await resp.text();
@@ -104,7 +104,7 @@ async function editarAluno(cpf) {
 
         document.querySelector('#formAluno input[name="cpf"]').value = aluno.cpf;
         document.querySelector('#formAluno input[name="nome"]').value = aluno.nome;
-        document.querySelector('#formAluno input[name="data_nascimento"]').value = aluno.data_nascimento;
+        document.querySelector('#formAluno input[name="data_nasc"]').value = aluno.data_nascimento;
         document.querySelector('#formAluno input[name="num_turma"]').value = aluno.num_turma;
     } catch (erro) {
         mostrarMensagem("Erro ao carregar aluno: " + erro.message, "erro");

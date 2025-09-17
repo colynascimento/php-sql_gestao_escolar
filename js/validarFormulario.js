@@ -9,7 +9,7 @@ function validarFormularioAluno(formId) {
 
     const cpf = form.querySelector('#cpf').value.trim();
     const nome = form.querySelector('#nome').value.trim();
-    const dataNascimento = form.querySelector('#data_nascimento').value.trim();
+    const dataNascimento = form.querySelector('#data_nascimento').value.trim();//verificar
     const turma = form.querySelector('#num_turma').value.trim();
 
     console.log("Valores capturados:", { cpf, nome, dataNascimento, turma });

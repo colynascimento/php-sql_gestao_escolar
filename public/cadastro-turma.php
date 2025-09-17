@@ -3,6 +3,7 @@ include("../conexao/conexao.php");
 include('../inludes/header.php');   // cabeçalho
 include('../api/exibir.php');
 include('../api/apagar.php');
+include('../api/turma/adicionar.php');
 
 ?>
 

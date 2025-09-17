@@ -1,6 +1,4 @@
-<?php
-include("../inludes/header.php")
-?>
+<?php include("../inludes/header.php")?>
 
 <form id="formAluno">
     <label>CPF:</label>
@@ -18,8 +16,28 @@ include("../inludes/header.php")
     <button type="submit">Cadastrar Aluno</button>
 </form>
 
+<!-- Botão Editar na tabela chama a função editarAluno(cpf) -->
+<form id="formEditarAluno" style="display: none;">
+    <h2>Editar Aluno</h2>
+    <label>CPF:</label>
+    <input type="text" name="cpf" readonly> <!-- CPF não pode ser alterado -->
+
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
+
+    <label>Data de Nascimento:</label>
+    <input type="date" name="data_nasc" required>
+
+    <label>Turma:</label>
+    <input type="number" name="num_turma" required>
+
+    <button type="button" onclick="salvarEdicao()">Salvar Alterações</button>
+    <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+</form>
+
+
 <h2>Lista de Alunos</h2>
-<table id="tabelaAlunos" border="1">
+<table id="tabelaAlunos">
     <thead>
         <tr>
             <th>CPF</th>
@@ -29,7 +47,9 @@ include("../inludes/header.php")
             <th>Ações</th>
         </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+        
+    </tbody>
 </table>
 
 <div id="mensagem"></div>
@@ -41,8 +61,6 @@ document.getElementById('formAluno').addEventListener('submit', e => {
     salvarAluno('formAluno', '/php-sql_gestao_escolar/api/aluno/adicionarAluno.php', atualizarTabelaAlunos);
 });
 
-// Carrega a tabela ao abrir a página
-atualizarTabelaAlunos();
 </script>
 
 <?php

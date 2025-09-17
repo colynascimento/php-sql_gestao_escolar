@@ -54,6 +54,8 @@
 
 <div id="mensagem"></div>
 
+<script src="../js/validarFormulario.js"></script>
+
 <script src="../js/manipularRegistro.js"></script>
 <script>
 document.getElementById('formAluno').addEventListener('submit', e => {

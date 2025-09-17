@@ -16,11 +16,13 @@ function validarFormularioAluno(formId) {
 
     if (!cpf || !nome || !dataNascimento || !turma) {
         alert("Todos os campos são obrigatórios!");
+        console.log("Passou pela validação de campos");
         return false;
     }
 
     if (cpf.length !== 11 || isNaN(cpf)) {
         alert("CPF deve conter 11 números.");
+        console.log("Passou pela validação de CPF");
         return false;
     }
 

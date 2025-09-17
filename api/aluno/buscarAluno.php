@@ -1,33 +1,36 @@
 <?php
-// Conecta ao banco
-include('../../conexao/conexao.php');  // ajuste o caminho conforme sua estrutura
+// ================================ Conexão com o banco ================================
+include('../../conexao/conexao.php');  // Inclui a conexão com o banco de dados
+header('Content-Type: application/json'); // Define que a resposta será JSON
 
-header('Content-Type: application/json');
+// ================================ Captura o CPF enviado via GET ================================
+$cpf = $_GET['cpf'] ?? ''; // Se não vier CPF, assume string vazia
 
-// Verifica se o CPF foi passado via GET
-$cpf = $_GET['cpf'] ?? '';
-
+// ================================ Validação ================================
 if ($cpf === '') {
+    // Retorna um JSON indicando erro se CPF não for informado
     echo json_encode(['erro' => 'CPF não informado']);
-    exit;
+    exit; // Interrompe a execução
 }
 
-// Prepara e executa a query para buscar o aluno
+// ================================ Consulta no banco ================================
 $sql = "SELECT cpf, nome, data_nasc, num_turma FROM alunos WHERE cpf = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('s', $cpf);
-$stmt->execute();
+$stmt = $conn->prepare($sql); // Prepara a query para evitar SQL Injection
+$stmt->bind_param('s', $cpf); // 's' indica que o parâmetro é string
+$stmt->execute();              // Executa a query
 
-$result = $stmt->get_result();
+$result = $stmt->get_result(); // Obtém o resultado da execução
 
-// Verifica se encontrou algum aluno
+// ================================ Verifica se encontrou algum aluno ================================
 if ($result->num_rows > 0) {
-    $aluno = $result->fetch_assoc(); // pega o primeiro (e único) registro como objeto
-    echo json_encode($aluno);        // retorna como objeto JSON
+    $aluno = $result->fetch_assoc(); // Pega o primeiro (único) registro
+    echo json_encode($aluno);        // Retorna os dados do aluno em JSON
 } else {
+    // Caso não encontre, retorna erro em JSON
     echo json_encode(['erro' => 'Aluno não encontrado']);
 }
 
-$stmt->close();
-$conn->close();
+// ================================ Finaliza ================================
+$stmt->close(); // Fecha o statement
+$conn->close(); // Fecha a conexão com o banco
 ?>

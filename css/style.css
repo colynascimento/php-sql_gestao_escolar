@@ -96,7 +96,7 @@
 /* PÁGINA PRINCIPAL INICIAL */
 
 #pagina-principal {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -159,10 +159,9 @@ nav ul li a:hover::after {
 }
 
 section {
-    display: flex;
-    justify-content: center;
+    display: block;
+    margin: 20px auto 20px auto;
     align-items: center;
-    margin-top: 50px;
 }
 
 table {
@@ -173,6 +172,7 @@ table {
   overflow: hidden;
   width: 1000px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 50px;
 }
 
 tbody th, tbody td {

@@ -24,6 +24,7 @@
 
             // Para cada turma encontrada, cria uma tabela separada
             while ($turma = $resultado->fetch_assoc()) {
+                echo "<section class='container-tabela'>";
                 echo "<table><thead>";
                 echo "<tr>
                         <th scope='col' colspan='4' class='cor-tabela1'>Turma: " . $turma['nome_turma'] . "</th>
@@ -46,7 +47,7 @@
                         <th scope='col' colspan='1' class='cor-tabela3'>Ações</th>
                     </tr>
                     <tr>
-                        <th scope='col' colspan='4'><button class='exibir-ocultar-tabela'>Exibir Alunos</button></th>
+                        <th scope='col' colspan='4'><button onclick='alternarTabela(this)' class='exibir-ocultar-tabela'>Exibir Alunos</button></th>
                     </tr>";
 
 
@@ -57,30 +58,28 @@
                 $resAlunos = $conn->query($sqlAlunos);
 
                 if ($resAlunos->num_rows > 0) {
-                    echo "<tbody class='corpo-tabela-principal'>";
+                    echo "<tbody class='corpo-tabela-principal' style='display:none'>";
                     while ($aluno = $resAlunos->fetch_assoc()) {
                         echo "<tr>
-                                <th scope='row' colspan='1'>" . $aluno['nome'] . "</tr>
-                                <th scope='row' colspan='1'>" . $aluno['data_nasc'] . "</tr>
-                                <th scope='row' colspan='1'>" . $aluno['cpf'] . "</tr>
-                                <th scope='row' colspan='1'><a href='editar.php?id='>Editar</a><a href='excluir.php?id=' onclick='return confirm('Deseja realmente excluir?')'>Excluir</a></th>
+                                <td scope='row' colspan='1'>" . $aluno['nome'] . "</td>
+                                <td scope='row' colspan='1'>" . $aluno['data_nasc'] . "</td>
+                                <td scope='row' colspan='1'>" . $aluno['cpf'] . "</td>
+                                <td scope='row' colspan='1'><a href='editar.php?id='>Editar</a><a href='excluir.php?id=' onclick='return confirm('Deseja realmente excluir?')'>Excluir</a></td>
                             </tr>";
                     }
                     echo "</tbody></table>";
                 } else {
                     echo "<tbody>";
-                    echo "<tr><th scope='row' colspan='4'>Nenhum aluno cadastrado nessa turma.</th></tr>";
+                    echo "<tr><td scope='row' colspan='4'>Nenhum aluno cadastrado nessa turma.</td></tr>";
                     echo "</tbody>";
+                    echo "</section>";
                 }
 
-                echo "<hr>";
             }
         } else {
             echo "<p>Nenhuma turma cadastrada.</p>";
         }
     }
-
-    listarTurmas($conn)
 
 ?>
 

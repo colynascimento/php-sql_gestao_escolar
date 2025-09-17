@@ -14,8 +14,7 @@
     }
 
     if ($login_valido) {
-        // redirecionar para página inicial do sistema de gestão
-        header('Location: ../public/pagina-inicial.php');
+        header("Location: pagina-inicial.php");
         exit();
     } else {
         alert('Usuário os senha incorretos!', '../public/index.php');

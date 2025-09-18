@@ -1,82 +1,86 @@
 <?php
 include('../conexao/conexao.php');  // abre a conexão
 include('../inludes/header.php');   // cabeçalho
+include('../conexao/conexao.php');
 include('../api/exibir.php');
 include('../api/adicionar.php');
 include('../api/apagar.php');
 ?>
 
 <h2>Cadastrar Professor</h2>
-<form method="POST" onsubmit="return validarFormulario()">
+<!-- ================================ Formulario Principal ================================ -->
+<form id="formProfessor">
 
-    <label>CPF:</label>
-    <input type="text" name="cpf" id="cpf" required maxlength="11" placeholder="Somente números"><br><br>
+    <label for="cpf">CPF:</label>
+    <input type="text" name="cpf" minlength="11" maxlength="11" required>
+    
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" minlength="3" required>
+    
+    <label for="data_nasc">Data Nascimento:</label>
+    <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
 
-    <label>Nome:</label>
-    <input type="text" name="nomeProf" id="nomeProf" required><br><br>
-
-    <label>Data de Nascimento:</label>
-    <input type="date" name="data_nasc" id="data_nasc" required><br><br>
-
-    <label>Título:</label>
-    <input type="text"  name = "titulo" id="titulo"><br><br>
-
-    <input type="submit" value="Cadastrar">
-
-    <!-- <button onclick="apagarProfessor()">Apagar Professor</button> -->
-   
+    <label for="titulo">Titulo:</label>
+    <input name="titulo"required>
+    >
+    <button type="submit">Cadastrar Aluno</button>
 </form>
 
-<script> 
+<!-- Div para exibir mensagens (sucesso, erro, etc.) -->
+<div id="mensagem"></div>
 
-    function validarFormulario() {
-        let cpf = document.getElementById("cpf").value;
-        let nomeProf = document.getElementById("nomeProf").value;
-        let data_nasc = document.getElementById("data_nasc").value;
-        let titulo = document.getElementById("titulo").value;
+<!-- ================================ Formulario para editar o Professor ================================ -->
+<!-- Por padrão, fica escondido (display:none) -->
+<form id="formEditarProfessor" style="display: none;">
+    <h2>Editar Professor</h2>
+    
+    <label>CPF:</label>
+    <input type="text" name="cpf" minlength="11" maxlength="11" required>
 
-        // Validação do CPF: 11 dígitos numéricos
-        if (!/^\d{11}$/.test(cpf)) {
-            alert("CPF deve conter exatamente 11 números.");
-            return false;
-        }
+    <label>Nome:</label>
+    <input type="text" name="nome" minlength="3" required>
 
-        if (nomeProf.trim().length < 3) {
-            alert("Nome deve ter pelo menos 3 caracteres.");
-            return false;
-        }
+    <label>Data Nascimento:</label>
+    <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
+    
+    <label for="titulo">Titulo:</label>
+    <input name="titulo"required>
 
-        if (!data_nasc) {
-            alert("Informe a data de nascimento.");
-            return false;
-        }
-        return true;
-    }
+    <!-- Botões para salvar ou cancelar a edição -->
+    <button type="button" onclick="salvarEdicao()">Salvar Alterações</button>
+    <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+</form>
+
+<!-- ================================ Tabela de alunos ================================ -->
+<h2>Lista de Professor</h2>
+<table id="tabelaProfessor">
+    <thead>
+        <tr>
+            <th>CPF</th>
+            <th>Nome</th>
+            <th>Data Nascimento</th>
+            <th>Titulo</th>
+            <th>Ações</th> <!-- Editar / Apagar -->
+        </tr>
+    </thead>
+    <tbody>
+        <!-- O JavaScript preenche dinamicamente com os professores -->
+    </tbody>
+</table>
+
+
+<!-- Script de manipulação de registros (CRUD via AJAX/Fetch) -->
+<script src="../js/manipularRegistroProfessor.js"></script>
+
+<script>
+// Intercepta o envio do formulário de cadastro
+document.getElementById('formProfessor').addEventListener('submit', e => {
+    e.preventDefault(); // Impede o reload da página
+    // Chama a função salvarAluno (definida em manipularRegistro.js)
+    salvarProfessor('formProfessor', '/php-sql_gestao_escolar/api/professor/adicionarProfessor.php', atualizarTabelaProfessor);
+});
 </script>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $dados = [
-        "cpf"        => $_POST['cpf'] ?? null,
-        "nome"       => $_POST['nomeProf'] ?? null,
-        "data_nasc"  => $_POST['data_nasc'] ?? null,
-        "titulo"  => $_POST['titulo'] ?? null
-    ];
-
-    // var_dump($_POST);
-    $resultado = inserirRegistro($conn, "professores", $dados);
-    
-    if ($resultado === true) {
-        echo "<p>Registro adicionado com sucesso!</p>";
-    } else {
-        echo "<p>$resultado</p>"; // já mostra se for duplicata ou erro
-    }
-}
-
-// Exibe a tabela de alunos cadastrados
-listarTabela($conn, "professores");
-
-include('../inludes/footer.php');
+include("../inludes/footer.php") // Inclui o rodapé
 ?>
-
-

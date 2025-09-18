@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ================================ Insere professor no banco ================================
     // Prepara a query de inserção
     $stmt = $conn->prepare("INSERT INTO professores (cpf, nome, data_nasc, titulo) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $cpf, $nome, $data_nasc, $titulo);
+    $stmt->bind_param("ssss", $cpf, $nome, $data_nasc, $titulo);
     // "sssi" indica: string, string, string, integer
 
     // Executa a inserção e verifica se funcionou

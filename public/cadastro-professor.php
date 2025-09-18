@@ -18,11 +18,10 @@ include('../api/apagar.php');
     <input type="text" name="nome" minlength="3" required>
     
     <label for="data_nasc">Data Nascimento:</label>
-    <input type="date" name="data_nasc" max="2025-12-31" required>
+    <input type="date" name="data_nasc" min="1960-01-01" max="2025-12-31" required>
 
     <label for="titulo">Titulo:</label>
     <input type="text" name="titulo"required>
-    >
     <button type="submit">Cadastrar Aluno</button>
 </form>
 
@@ -34,15 +33,15 @@ include('../api/apagar.php');
 <form id="formEditarProfessor" style="display: none;">
     <h2>Editar Professor</h2>
     
-    <label>CPF:</label>
+    <label for="cpf">CPF:</label>
     <input type="text" name="cpf" minlength="11" maxlength="11" required>
-
-    <label>Nome:</label>
-    <input type="text" name="nome" minlength="3" required>
-
-    <label>Data Nascimento:</label>
-    <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
     
+    <label for="nome">Nome:</label>
+    <input type="text" name="nome" minlength="3" required>
+    
+    <label for="data_nasc">Data Nascimento:</label>
+    <input type="date" name="data_nasc" min="1960-01-01" max="2025-12-31" required>
+
     <label for="titulo">Titulo:</label>
     <input type="text" name="titulo"required>
 

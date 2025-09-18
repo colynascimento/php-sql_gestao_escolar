@@ -1,8 +1,9 @@
 <?php
 include("../conexao/conexao.php");
 include('../inludes/header.php');   // cabeçalho
-include('../api/exibir.php');
-include('../api/apagar.php');
+include('../api/turma/exibirTurma.php');
+// include('../api/turma/apagarTurma.php');
+// include('../api/turma/editarTurma.php');
 
 ?>
 

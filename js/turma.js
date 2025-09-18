@@ -1,3 +1,5 @@
+const form = document.getElementById("cadTurma");
+
 // função para enviar os dados para o PHP
 async function cadastrarTurma(dados, msgX){
     const resposta = await fetch("../api/turma/adicionar.php", {
@@ -12,6 +14,7 @@ async function cadastrarTurma(dados, msgX){
     if (resultado.sucesso) {
         msgX.innerText = "Turma cadastrada com sucesso!";
         document.getElementById("cadTurma").reset();
+        setTimeout(() => location.reload(), 1000);//serve para atualizar a tabela
     }else{
         msgX.innerText = "Erro: "+ resultado.erro;
     }

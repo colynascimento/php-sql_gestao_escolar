@@ -27,10 +27,13 @@ $sql = "INSERT INTO turmas (num_turma, nome, turno, sala) VALUES ('$num_turma', 
         
 if ($conn->query($sql) === TRUE) {
     echo json_encode(["sucesso"=> true]);
+    
 } else {
     echo json_encode(["sucesso"=> false, "erro" => $conn->error]);
 }
+
+ 
 $conn->close();
-    
+
  
 ?>

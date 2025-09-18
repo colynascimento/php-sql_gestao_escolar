@@ -3,41 +3,45 @@
 
 <!-- ================================ Formulario Principal ================================ -->
 <form id="formAluno">
+    <fieldset>
     <!-- Campo para CPF (11 caracteres fixos) -->
-    <label>CPF:</label>
-    <input type="text" name="cpf" minlength="11" maxlength="11" required>
+        <label for='cpfAluno'>CPF:</label>
+        <input type="text" name="cpfAluno" minlength="11" maxlength="11" name='cpf' required>
+
+        <!-- Campo para Nome (mínimo 3 letras) -->
+        <label for="nome">Nome:</label>
+        <input type="text" name="nomeAluno" minlength="3" name="nomeAluno" required>
+    </fieldset>
     
-    <!-- Campo para Nome (mínimo 3 letras) -->
-    <label>Nome:</label>
-    <input type="text" name="nome" minlength="3" required>
-    
-    <!-- Campo para Data de Nascimento, com limites definidos -->
-    <label>Data Nascimento:</label>
-    <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
-    
-    <!-- Campo de seleção da turma -->
-    <label for="num_turma">Turma:</label>
-    <select name="num_turma" id="num_turma" required>
-        <option value="">-- Selecione uma turma --</option>
-        <?php
-        // Busca todas as turmas cadastradas no banco
-        if ($conn) {
-            $sql = "SELECT num_turma, nome, turno, sala FROM turmas";
-            $result = $conn->query($sql);
-            
-            // Se houver resultados, gera cada <option>
-            if ($result && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    // Cada opção tem como value o número da turma
-                    // E exibe: Nome - Turno - Sala
-                    echo '<option value="' . $row['num_turma'] . '">';
-                    echo $row['nome'] . ' - ' . $row['turno'] . ' - Sala ' . $row['sala'];
-                    echo '</option>';
+    <fieldset>
+        <!-- Campo para Data de Nascimento, com limites definidos -->
+        <label>Data Nascimento:</label>
+        <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
+
+        <!-- Campo de seleção da turma -->
+        <label for="num_turma">Turma:</label>
+        <select name="num_turma" id="num_turma" required>
+            <option value="">-- Selecione uma turma --</option>
+            <?php
+            // Busca todas as turmas cadastradas no banco
+            if ($conn) {
+                $sql = "SELECT num_turma, nome, turno, sala FROM turmas";
+                $result = $conn->query($sql);
+
+                // Se houver resultados, gera cada <option>
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        // Cada opção tem como value o número da turma
+                        // E exibe: Nome - Turno - Sala
+                        echo '<option value="' . $row['num_turma'] . '">';
+                        echo $row['nome'] . ' - ' . $row['turno'] . ' - Sala ' . $row['sala'];
+                        echo '</option>';
+                    }
                 }
             }
-        }
-        ?>
-    </select>
+            ?>
+        </select>
+    </fieldset>
     
     <!-- Botão para enviar o formulário (cadastrar aluno) -->
     <button type="submit">Cadastrar Aluno</button>

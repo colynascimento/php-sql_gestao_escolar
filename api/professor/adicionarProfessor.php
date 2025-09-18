@@ -10,15 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cpf = $_POST['cpf'] ?? '';
     $nome = $_POST['nome'] ?? '';
     $data_nasc = $_POST['data_nasc'] ?? '';
-    $titulo = $_POST['num_turma'] ?? '';
-
-    // ================================ Validação básica ================================
-    // Verifica se algum campo obrigatório está vazio
-    if (!$cpf || !$nome || !$data_nasc || !$titulo) {
-        echo "Erro: Todos os campos são obrigatórios.";
-        exit; // Interrompe a execução do script
-    }
-
+    $titulo = $_POST['titulo'] ?? '';
     // ================================ Verifica duplicidade de CPF ================================
     // Prepara a query para verificar se o CPF já existe
     $check = $conn->prepare("SELECT cpf FROM professores WHERE cpf = ?");

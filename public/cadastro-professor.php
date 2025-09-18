@@ -18,10 +18,10 @@ include('../api/apagar.php');
     <input type="text" name="nome" minlength="3" required>
     
     <label for="data_nasc">Data Nascimento:</label>
-    <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
+    <input type="date" name="data_nasc" max="2025-12-31" required>
 
     <label for="titulo">Titulo:</label>
-    <input name="titulo"required>
+    <input type="text" name="titulo"required>
     >
     <button type="submit">Cadastrar Aluno</button>
 </form>
@@ -44,7 +44,7 @@ include('../api/apagar.php');
     <input type="date" name="data_nasc" min="2007-01-01" max="2025-12-31" required>
     
     <label for="titulo">Titulo:</label>
-    <input name="titulo"required>
+    <input type="text" name="titulo"required>
 
     <!-- Botões para salvar ou cancelar a edição -->
     <button type="button" onclick="salvarEdicao()">Salvar Alterações</button>

@@ -31,9 +31,9 @@ async function salvarProfessor(formId, url, callback = null) {
             if (callback) callback(); // Chama função de callback se fornecida (ex.: atualizar tabela)
         }
     } catch (erro) {
+        console.log(erro); // Log indicando conclusão
         mostrarMensagem("Erro: " + erro.message, "erro"); // Captura erro de requisição
     }
-    
     console.log('Passou pela função salvarProfessor'); // Log indicando conclusão
 }
 
@@ -108,7 +108,7 @@ async function salvarEdicao() {
         cpf: form.cpf.value,
         nome: form.nome.value,
         data_nasc: form.data_nasc.value,
-        num_turma: form.num_turma.value
+        titulo: form.titulo.value
     };
 
     try {

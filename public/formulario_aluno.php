@@ -7,14 +7,14 @@
         <legend id="legendaFormAlunos">Cadastrar Aluno</legend>
         <div class="formBox">
             <!-- Campo para CPF (11 caracteres fixos) -->
-            <label for='cpfAluno'>CPF:</label>
-            <input type="text" name="cpfAluno" minlength="11" maxlength="11" name='cpf' required>
+            <label for='cpf'>CPF:</label>
+            <input type="text" name="cpf" minlength="11" maxlength="11"required>
         </div>
 
         <div class="formBox">
             <!-- Campo para Nome (mínimo 3 letras) -->
             <label for="nome">Nome:</label>
-            <input type="text" name="nomeAluno" minlength="3" name="nomeAluno" required>
+            <input type="text" name="nome" minlength="3"required>
         </div>
     </fieldset>
     

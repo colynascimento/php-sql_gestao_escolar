@@ -7,22 +7,33 @@ include('../api/adicionar.php');
 include('../api/apagar.php');
 ?>
 
-<h2>Cadastrar Professor</h2>
 <!-- ================================ Formulario Principal ================================ -->
 <form id="formProfessor">
-
-    <label for="cpf">CPF:</label>
-    <input type="text" name="cpf" minlength="11" maxlength="11" required>
+    <fieldset>
+        <legend id='legendaFormProfessores'>Cadastrar Professor</legend>
+        <div class="formBox">
+            <label for="cpf">CPF:</label>
+            <input type="text" name="cpf" minlength="11" maxlength="11" required>
+        </div>
+        <div class="formBox">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" minlength="3" required>
+        </div>
+    </fieldset>
     
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" minlength="3" required>
-    
-    <label for="data_nasc">Data Nascimento:</label>
-    <input type="date" name="data_nasc" min="1960-01-01" max="2025-12-31" required>
+    <fieldset>
+        <div class="formBox">
+            <label for="data_nasc">Data Nascimento:</label>
+            <input type="date" name="data_nasc" min="1960-01-01" max="2025-12-31" required>
+        </div>
 
-    <label for="titulo">Titulo:</label>
-    <input type="text" name="titulo"required>
-    <button type="submit">Cadastrar Aluno</button>
+        <div class="formBox">
+            <label for="titulo">Titulo:</label>
+            <input type="text" name="titulo"required>
+        </div>
+    </fieldset>
+
+    <button type="submit">Enviar</button>
 </form>
 
 <!-- Div para exibir mensagens (sucesso, erro, etc.) -->
@@ -31,30 +42,44 @@ include('../api/apagar.php');
 <!-- ================================ Formulario para editar o Professor ================================ -->
 <!-- Por padrão, fica escondido (display:none) -->
 <form id="formEditarProfessor" style="display: none;">
-    <h2>Editar Professor</h2>
-    
-    <label for="cpf">CPF:</label>
-    <input type="text" name="cpf" minlength="11" maxlength="11" required>
-    
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" minlength="3" required>
-    
-    <label for="data_nasc">Data Nascimento:</label>
-    <input type="date" name="data_nasc" min="1960-01-01" max="2025-12-31" required>
+    <fieldset>
+        <legend>Editar Professor</legend>
 
-    <label for="titulo">Titulo:</label>
-    <input type="text" name="titulo"required>
+        <div class="formBox">
+            <label for="cpf">CPF:</label>
+            <input type="text" name="cpf" minlength="11" maxlength="11" required>
+        </div>
 
-    <!-- Botões para salvar ou cancelar a edição -->
-    <button type="button" onclick="salvarEdicao()">Salvar Alterações</button>
-    <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+        <div class="formBox">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" minlength="3" required>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <div class="formBox">
+            <label for="data_nasc">Data Nascimento:</label>
+            <input type="date" name="data_nasc" min="1960-01-01" max="2025-12-31" required>
+        </div>
+
+        <div class="formBox">
+            <label for="titulo">Titulo:</label>
+            <input type="text" name="titulo"required>
+        </div>
+    </fieldset>
+
+    <div class="btnBox">
+        <!-- Botões para salvar ou cancelar a edição -->
+        <button type="button" onclick="salvarEdicao()">Salvar Alterações</button>
+        <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    </div>
 </form>
 
 <!-- ================================ Tabela de alunos ================================ -->
-<h2>Lista de Professor</h2>
+<h2>Lista de Professores</h2>
 <table id="tabelaProfessor">
     <thead>
-        <tr>
+        <tr class='cor-tabela1'>
             <th>CPF</th>
             <th>Nome</th>
             <th>Data Nascimento</th>

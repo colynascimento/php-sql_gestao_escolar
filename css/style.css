@@ -214,7 +214,9 @@ footer {
 
 /* PÁGINA ALUNOS */
 
-#formAluno, #formEditarAluno, #formDisciplina {
+#formAluno, #formEditarAluno, 
+#formDisciplina, 
+#formProfessor, #formEditarProfessor {
     background-color: #fff;
     border-radius: 12px;
     border: 1px solid #ccc;
@@ -246,17 +248,18 @@ fieldset {
     width: 275px;
 }
 
- #formAluno label, #formEditarAluno label, #formDisciplina label {
+ #formAluno label, #formEditarAluno label, 
+ #formDisciplina label, 
+ #formProfessor label, #formEditarProfessor label {
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-#formAluno input,
-#formAluno select,
-#formEditarAluno input,
-#formEditarAluno select,
-#formDisciplina input,
-#formDisciplina select {
+#formAluno input, #formAluno select,
+#formEditarAluno input, #formEditarAluno select,
+#formDisciplina input, #formDisciplina select,
+#formProfessor input, 
+#formEditarProfessor input{
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -264,7 +267,9 @@ fieldset {
 }
 
 
-#formAluno button, #formEditarAluno button, #formDisciplina button {
+#formAluno button, #formEditarAluno button, 
+#formDisciplina button, 
+#formProfessor button, #formEditarProfessor button {
     width: 300px; 
     padding: 12px 0;
     border: none;
@@ -277,7 +282,10 @@ fieldset {
     transition: background 0.3s ease;
 }
 
-#formAluno button:hover, #formEditarAluno button:hover, #formDisciplina button:hover {
+#formAluno button:hover, #formEditarAluno button:hover, 
+#formDisciplina button:hover, 
+#formProfessor button:hover,
+#formEditarProfessor button:hover {
     background-color: #292DC2;
 }
 
@@ -296,6 +304,12 @@ h2 {
 
 #legendaFormDisciplinas::before {
     content: "📚";
+    font-size: 20px;
+    margin-right: 6px;
+}
+
+#legendaFormProfessores::before {
+    content: "👩🏻‍🏫";
     font-size: 20px;
     margin-right: 6px;
 }
@@ -320,7 +334,7 @@ legend {
     width: 100%;
 }
 
-#formEditarAluno button {
+#formEditarAluno button, #formEditarProfessor button {
     width: 250px;
     background-color: #5F65F6;
     font-size: 15px;

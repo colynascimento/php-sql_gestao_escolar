@@ -53,7 +53,7 @@
     </fieldset>
     
     <!-- Botão para enviar o formulário (cadastrar aluno) -->
-    <button type="submit">Cadastrar Aluno</button>
+    <button type="submit">Enviar</button>
 </form>
 <!-- Div para exibir mensagens (sucesso, erro, etc.) -->
 <div id="mensagem"></div>

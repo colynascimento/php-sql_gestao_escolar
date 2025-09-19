@@ -13,6 +13,7 @@
 
         <nav>
             <ul>
+                <li><a href='pagina-inicial.php'>Home</a><li>
                 <li><a href='formulario_aluno.php'>Alunos</a></li>
                 <li><a href='cadastro-disciplina.php'>Disciplinas</a></li>
                 <li><a href='cadastro-professor.php'>Docentes</a></li>

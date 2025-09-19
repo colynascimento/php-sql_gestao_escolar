@@ -4,7 +4,7 @@
 <!-- ================================ Formulario Principal ================================ -->
 <form id="formAluno">
     <fieldset>
-        <legend>Cadastrar Aluno</legend>
+        <legend id="legendaFormAlunos">Cadastrar Aluno</legend>
         <div class="formBox">
             <!-- Campo para CPF (11 caracteres fixos) -->
             <label for='cpfAluno'>CPF:</label>
@@ -113,7 +113,7 @@
 </form>
 
 <!-- ================================ Tabela de alunos ================================ -->
-<h2 id="tituloTabelaAlunos">Lista de Alunos</h2>
+<h2>Lista de Alunos</h2>
 <table id="tabelaAlunos">
     <thead>
         <tr class='cor-tabela1'>

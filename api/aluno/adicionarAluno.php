@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ================================ Validação básica ================================
     // Verifica se algum campo obrigatório está vazio
     if (!$cpf || !$nome || !$data_nasc || !$num_turma) {
+        echo "<script>console.log('PHP: $cpf, $nome ,$data_nasc ,$num_turma');</script>";
         echo "Erro: Todos os campos são obrigatórios.";
         exit; // Interrompe a execução do script
     }

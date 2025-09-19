@@ -216,7 +216,8 @@ footer {
 
 #formAluno, #formEditarAluno, 
 #formDisciplina, 
-#formProfessor, #formEditarProfessor {
+#formProfessor, #formEditarProfessor,
+#formTurmas, #formEditarTurmas {
     background-color: #fff;
     border-radius: 12px;
     border: 1px solid #ccc;
@@ -250,7 +251,8 @@ fieldset {
 
  #formAluno label, #formEditarAluno label, 
  #formDisciplina label, 
- #formProfessor label, #formEditarProfessor label {
+ #formProfessor label, #formEditarProfessor label,
+ #formTurmas label, #formEditarTurmas label {
     margin-bottom: 5px;
     font-weight: bold;
 }
@@ -258,8 +260,9 @@ fieldset {
 #formAluno input, #formAluno select,
 #formEditarAluno input, #formEditarAluno select,
 #formDisciplina input, #formDisciplina select,
-#formProfessor input, 
-#formEditarProfessor input{
+#formProfessor input, #formEditarProfessor input,
+#formTurmas input, #formTurmas select, 
+#formEditarTurmas input, #formEditarTurmas select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -269,7 +272,8 @@ fieldset {
 
 #formAluno button, #formEditarAluno button, 
 #formDisciplina button, 
-#formProfessor button, #formEditarProfessor button {
+#formProfessor button, #formEditarProfessor button,
+#formTurmas button, #formEditarTurmas button {
     width: 300px; 
     padding: 12px 0;
     border: none;
@@ -284,8 +288,8 @@ fieldset {
 
 #formAluno button:hover, #formEditarAluno button:hover, 
 #formDisciplina button:hover, 
-#formProfessor button:hover,
-#formEditarProfessor button:hover {
+#formProfessor button:hover, #formEditarProfessor button:hover,
+#formTurmas button:hover, #formEditarTurmas button:hover {
     background-color: #292DC2;
 }
 
@@ -314,6 +318,12 @@ h2 {
     margin-right: 6px;
 }
 
+#legendaFormTurmas::before {
+    content: "🏫";
+    font-size: 20px;
+    margin-right: 6px;
+}
+
 th {
     height: 45px;
     text-transform: uppercase;
@@ -334,7 +344,7 @@ legend {
     width: 100%;
 }
 
-#formEditarAluno button, #formEditarProfessor button {
+#formEditarAluno button, #formEditarProfessor button, #formEditarTurmas button {
     width: 250px;
     background-color: #5F65F6;
     font-size: 15px;

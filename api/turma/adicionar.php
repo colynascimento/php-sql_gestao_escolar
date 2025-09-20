@@ -1,39 +1,66 @@
-<!-- adicionar turmas -->
+
 <?php
-//define que a resposta do servidor será enviada via JSON
-header("Content-Type: application/json");
-// conexão com o banco de dados
-include("../../conexao/conexao.php");
+include('../conexao/conexao.php');
 
 
-//lê a requisição e converte de JSON para array associativo
-$dados = json_decode(file_get_contents("php://input"), true);
+header('Content-Type: text/plain'); // Define o tipo de conteúdo da resposta como texto puro
 
-// vê se os dados foram recebidos
-if (!$dados){
-    echo json_encode(["sucesso" => false, "erro" => "Nenhum dado recebido"]);//se não tiver recebido nada, a "variavel" sucesso recebe "false" e a "variavel" erro recebe "Nenhum...."
-    exit;
+
+// Verifica se a requisição é POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Captura os dados enviados pelo formulário via POST
+    $num_turma = $_POST['num_turma'] ?? '';
+    $nome = $_POST['nome'] ?? '';
+    $turno = $_POST['turno'] ?? '';
+    $sala = $_POST['sala'] ?? '';
+
+    // Validação duplicidade turma
+    $check = $conn->prepare("SELECT cpf FROM turmas WHERE num_turma = ?");
+    $check->bind_param("s", $num_turma); // 's' indica que o parâmetro é string
+    $check->execute();
+    $check->store_result(); // Armazena o resultado da consulta
+
+    if ($check->num_rows > 0) {
+        echo "Erro: Já existe uma turma com este número.";
+        exit;
+    }
+
+    // Insere aluno no banco
+    $stmt = $conn->prepare("INSERT INTO alunos (num_turma, nome, turno, sala) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $num_turma, $nome, $turno, $sala);
+    // "isss" indica: integer, string, string, string
+
+    // Executa a inserção e verifica se funcionou
+    if ($stmt->execute()) {
+        echo "Turma cadastrada com sucesso!";
+    } else {
+        echo "Erro ao cadastrar turma: " . $stmt->error;
+    }
+
+    // Fecha o statement e a conexão com o banco
+    $stmt->close();
+    $conn->close();
 }
-//se tudo der certo:
-$num_turma = $conn->real_escape_string($dados["num_turma"]);
-$nomeTurma = $conn->real_escape_string($dados["nomeTurma"]);
-$turno = $conn->real_escape_string($dados["turno"]);
-$sala = $conn->real_escape_string($dados["sala"]);
 
-//monta comando sql para inserir a turma na tabela turmas
+function inserirRegistro($conn, $tabela, $coluna, $PK, $dados) {
+    // Verifica se já existe
+    $check = $conn->query("SELECT 1 FROM $tabela WHERE $coluna = $PK");
 
-$sql = "INSERT INTO turmas (num_turma, nome, turno, sala) VALUES ('$num_turma', '$nomeTurma', '$turno', '$sala')";
+    if ($check && $check->num_rows > 0) {
+        return "<span style='color:red;'>Erro: já existe um registro com este valor ($PK).</span>";
+    }
 
-        
-if ($conn->query($sql) === TRUE) {
-    echo json_encode(["sucesso"=> true]);
-    
-} else {
-    echo json_encode(["sucesso"=> false, "erro" => $conn->error]);
+    // Monta campos e valores
+    $campos = implode(", ", array_keys($dados));
+    $valores = implode("', '", array_map([$conn, 'real_escape_string'], array_values($dados)));
+
+    $sql = "INSERT INTO $tabela ($campos) VALUES ('$valores')";
+
+    if ($conn->query($sql) === TRUE) {
+        return true;
+    } else {
+        return "Erro SQL: " . $conn->error;
+    }
 }
-
- 
-$conn->close();
-
- 
 ?>

@@ -60,7 +60,7 @@ async function atualizarTabelaDisciplina() {
             console.log('Print Disciplina');
 
             tr.innerHTML = `
-                <td>${Disciplina.cod_disc}</td> <!-- CPF do Disciplina -->
+                <td>${Disciplina.cod_disc}</td> <!-- cod_disc do Disciplina -->
                 <td>${Disciplina.nome_disciplina}</td> <!-- Nome do Disciplina -->
                 <td>${Disciplina.carga_horaria}</td> <!-- Data de nascimento -->
                 <td>
@@ -83,10 +83,10 @@ async function atualizarTabelaDisciplina() {
 
 // ================================ Apaga aluno ================================
 // Função para apagar aluno do banco
-async function apagarDisciplina(cpf) {
-    if (!confirm(`Deseja apagar o Disciplina ${cpf}?`)) return; // Confirmação com o usuário
+async function apagarDisciplina(cod_disc) {
+    if (!confirm(`Deseja apagar o Disciplina ${cod_disc}?`)) return; // Confirmação com o usuário
     const formData = new FormData();
-    formData.append('cpf', cpf); // Adiciona o CPF ao formData
+    formData.append('cod_disc', cod_disc); // Adiciona o cod_disc ao formData
 
     try {
         const resp = await fetch('/php-sql_gestao_escolar/api/Disciplina/apagarDisciplina.php', { method: "POST", body: formData });
@@ -104,10 +104,9 @@ async function salvarEdicao() {
     const form = document.querySelector('#formEditarDisciplina');
 
     const Disciplina = {
-        cpf: form.cpf.value,
-        nome: form.nome.value,
-        data_nasc: form.data_nasc.value,
-        titulo: form.titulo.value
+        cod_disc: form.cod_disc.value,
+        nome_disciplina: form.nome_disciplina.value,
+        carga_horaria: form.carga_horaria.value,
     };
 
     try {
@@ -133,9 +132,9 @@ async function salvarEdicao() {
 
 // ================================ Preenche formulário para edição ================================
 // Função para preencher o formulário de edição com os dados do aluno selecionado
-async function editarDisciplina(cpf) {
+async function editarDisciplina(cod_disc) {
     try {
-        const resp = await fetch(`/php-sql_gestao_escolar/api/Disciplina/buscarDisciplina.php?cpf=${cpf}`);
+        const resp = await fetch(`/php-sql_gestao_escolar/api/Disciplina/buscarDisciplina.php?cod_disc=${cod_disc}`);
         const aluno = await resp.json();
         const dados = Array.isArray(aluno) ? aluno[0] : aluno; // Se retornar array, pega o primeiro item
 
@@ -143,10 +142,9 @@ async function editarDisciplina(cpf) {
         form.style.display = 'block'; // Mostra o formulário
 
         // Preenche os campos com os dados do aluno
-        form.cpf.value = dados.cpf || '';
-        form.nome.value = dados.nome || '';
-        form.data_nasc.value = dados.data_nasc || '';
-        form.titulo.value = dados.titulo || '';
+        form.cod_disc.value = dados.cod_disc || '';
+        form.nome_disciplina.value = dados.nome_disciplina || '';
+        form.carga_horaria.value = dados.cod_disc || '';
     } catch (erro) {
         mostrarMensagem("Erro ao carregar Disciplina: " + erro.message, "erro");
     }

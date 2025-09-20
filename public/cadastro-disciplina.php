@@ -28,7 +28,7 @@ include('../inludes/header.php');
 
 <div id="mensagem"></div>
 
-<!-- ================================ Formulario Principal ================================ -->
+<!-- ================================ Formulario editção de registro ================================ -->
 <form id="formEditarDisciplina" style="display: none;">
     
     <fieldset>

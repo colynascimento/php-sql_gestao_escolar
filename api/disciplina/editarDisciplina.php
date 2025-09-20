@@ -15,13 +15,13 @@ if (!$dados) {
 }
 
 // ================================ Prepara a query de atualização ================================
-$sql = "UPDATE alunos SET nome = ?, data_nasc = ?, num_turma = ? WHERE cpf = ?";
+$sql = "UPDATE disciplinas SET nome_disciplina = ?, carga_horaria = ? WHERE cod_disc = ?";
 $stmt = $conn->prepare($sql); 
 // Prepara a query para evitar SQL Injection
-// Atualiza nome, data de nascimento e turma baseado no CPF
+// Atualiza nome_disciplina, data de nascimento e turma baseado no cod_disc
 
 // Bind dos parâmetros: 'ssis' indica string, string, integer, string
-$stmt->bind_param('ssis', $dados['nome'], $dados['data_nasc'], $dados['num_turma'], $dados['cpf']);
+$stmt->bind_param('ssi', $dados['nome_disciplina'], $dados['carga_horaria'],$dados['cod_disc']);
 
 // ================================ Executa e verifica ================================
 if ($stmt->execute()) {

@@ -101,7 +101,7 @@ include('../api/turma/exibirTurma.php');
 </table>
 
 
-<script src = "../js/manipular-registro-turma.js"></script>
+<script src = "../js/manipularRegistroTurma.js"></script>
 
 
 <script>

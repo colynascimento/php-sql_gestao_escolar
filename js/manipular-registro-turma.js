@@ -44,7 +44,7 @@ async function atualizarTabelaTurmas() {
 
             tr.innerHTML = `
                 <td>${turma.num_turma}</td>
-                <td>${turma.nome_turma}</td>
+                <td>${turma.nome}</td>
                 <td>${turma.turno}</td>
                 <td>${turma.sala}</td>
                 <td>

@@ -90,8 +90,8 @@ include('../api/turma/exibirTurma.php');
 <table id="tabelaTurmas">
     <thead>
         <tr class='cor-tabela1'>
-            <th>Número da turma:</th>
-            <th>Nome da turma:</th>
+            <th>Número da turma</th>
+            <th>Nome da turma</th>
             <th>Turno</th>
             <th>Sala</th>
             <th>Ações</th> <!-- Editar / Apagar -->

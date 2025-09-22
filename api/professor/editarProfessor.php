@@ -21,7 +21,7 @@ $stmt = $conn->prepare($sql);
 // Atualiza nome, data de nascimento e turma baseado no CPF
 
 // Bind dos parâmetros: 'ssis' indica string, string, integer, string
-$stmt->bind_param('ssis', $dados['nome'], $dados['data_nasc'], $dados['titulo'], $dados['cpf']);
+$stmt->bind_param('ssss', $dados['nome'], $dados['data_nasc'], $dados['titulo'], $dados['cpf']);
 
 // ================================ Executa e verifica ================================
 if ($stmt->execute()) {

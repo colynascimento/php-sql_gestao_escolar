@@ -144,7 +144,7 @@ async function editarDisciplina(cod_disc) {
         // Preenche os campos com os dados do aluno
         form.cod_disc.value = dados.cod_disc || '';
         form.nome_disciplina.value = dados.nome_disciplina || '';
-        form.carga_horaria.value = dados.cod_disc || '';
+        form.carga_horaria.value = dados.carga_horaria || '';
     } catch (erro) {
         mostrarMensagem("Erro ao carregar Disciplina: " + erro.message, "erro");
     }

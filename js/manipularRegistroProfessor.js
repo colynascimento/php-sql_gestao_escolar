@@ -136,7 +136,7 @@ async function salvarEdicao() {
 // Função para preencher o formulário de edição com os dados do aluno selecionado
 async function editarProfessor(cpf) {
     try {
-        const resp = await fetch(`/php-sql_gestao_escolar/api/professor/buscarPRofessor.php?cpf=${cpf}`);
+        const resp = await fetch(`/php-sql_gestao_escolar/api/professor/buscarProfessor.php?cpf=${cpf}`);
         const aluno = await resp.json();
         const dados = Array.isArray(aluno) ? aluno[0] : aluno; // Se retornar array, pega o primeiro item
 

@@ -131,7 +131,7 @@
 
 
 <!-- Script de manipulação de registros (CRUD via AJAX/Fetch) -->
-<script src="../js/manipularRegistro.js"></script>
+<script src="../js/manipularRegistroAluno.js"></script>
 
 <script>
 // Intercepta o envio do formulário de cadastro

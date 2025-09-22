@@ -21,7 +21,7 @@ $stmt = $conn->prepare($sql);
 // Atualiza nome_disciplina, data de nascimento e turma baseado no cod_disc
 
 // Bind dos parâmetros: 'ssis' indica string, string, integer, string
-$stmt->bind_param('ssi', $dados['nome_disciplina'], $dados['carga_horaria'],$dados['cod_disc']);
+$stmt->bind_param('sii', $dados['nome_disciplina'], $dados['carga_horaria'],$dados['cod_disc']);
 
 // ================================ Executa e verifica ================================
 if ($stmt->execute()) {

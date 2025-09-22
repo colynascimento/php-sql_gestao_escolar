@@ -30,7 +30,7 @@ async function salvarTurma(formId, url, callback = null) {
 
 async function atualizarTabelaTurmas() {
     try {
-        const resp = await fetch('/php-sql_gestao_escolar/api/turma/exibir.php');
+        const resp = await fetch('/php-sql_gestao_escolar/api/turma/exibirTurma.php');
         const texto = await resp.text();
 
         const turmas = JSON.parse(texto); // Converte o texto em JSON
@@ -66,7 +66,7 @@ async function apagarTurma(num_turma) {
     formData.append('num_turma', num_turma); // Adiciona o CPF ao formData
 
     try {
-        const resp = await fetch('/php-sql_gestao_escolar/api/turma/apagar.php', { method: "POST", body: formData });
+        const resp = await fetch('/php-sql_gestao_escolar/api/turma/apagarTurma.php', { method: "POST", body: formData });
         const texto = await resp.text();
         mostrarMensagem(texto, texto.toLowerCase().includes("erro") ? "erro" : "sucesso");
         atualizarTabelaAlunos(); // Atualiza a tabela após apagar
@@ -86,7 +86,7 @@ async function salvarEdicao() {
     };
 
     try {
-        const resp = await fetch('/php-sql_gestao_escolar/api/turma/editar.php', {
+        const resp = await fetch('/php-sql_gestao_escolar/api/turma/editarTurma.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(turma)
@@ -108,7 +108,7 @@ async function salvarEdicao() {
 
 async function editarTurma(num_turma) {
     try {
-        const resp = await fetch(`/php-sql_gestao_escolar/api/turma/buscar.php?num_turma=${num_turma}`);
+        const resp = await fetch(`/php-sql_gestao_escolar/api/turma/buscarTurma.php?num_turma=${num_turma}`);
         const turma = await resp.json();
         const dados = Array.isArray(turma) ? turma[0] : turma;
 

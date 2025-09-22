@@ -2,8 +2,6 @@
 include("../conexao/conexao.php");
 include('../inludes/header.php');   // cabeçalho
 include('../api/turma/exibirTurma.php');
-// include('../api/turma/apagarTurma.php');
-// include('../api/turma/editarTurma.php');
 ?>
 
 
@@ -111,7 +109,7 @@ include('../api/turma/exibirTurma.php');
 document.getElementById('formTurmas').addEventListener('submit', e => {
     e.preventDefault(); // Impede o reload da página
     // Chama a função salvarAluno (definida em manipularRegistro.js)
-    salvarAluno('formTurmas', '/php-sql_gestao_escolar/api/turma/adicionar.php', atualizarTabelaTurmas);
+    salvarAluno('formTurmas', '/php-sql_gestao_escolar/api/turma/adicionarTurma.php', atualizarTabelaTurmas);
 });
 </script>
 

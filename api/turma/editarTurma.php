@@ -2,7 +2,11 @@
 include('../../conexao/conexao.php'); 
 header('Content-Type: application/json');
 
-$dados = json_decode(file_get_contents('php://input'), true); 
+// error_reporting(0);
+// ini_set('display_errors', 0);
+
+// $dados = json_decode(file_get_contents('php://input'), true); 
+$dados = $_POST;
 // Lê o corpo da requisição como JSON e converte para array associativo
 
 if (!$dados) {

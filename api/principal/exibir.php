@@ -44,7 +44,6 @@
                         <th scope='col' colspan='1' class='cor-tabela3'>Nome</th>
                         <th scope='col' colspan='1' class='cor-tabela3'>Data de Nascimento</th>
                         <th scope='col' colspan='1' class='cor-tabela3'>CPF</th>
-                        <th scope='col' colspan='1' class='cor-tabela3'>Ações</th>
                     </tr>
                     <tr>
                         <th scope='col' colspan='4'><button onclick='alternarTabela(this)' class='exibir-ocultar-tabela'>Exibir Alunos</button></th>
@@ -64,7 +63,6 @@
                                 <td scope='row' colspan='1'>" . $aluno['nome'] . "</td>
                                 <td scope='row' colspan='1'>" . $aluno['data_nasc'] . "</td>
                                 <td scope='row' colspan='1'>" . $aluno['cpf'] . "</td>
-                                <td scope='row' colspan='1'><a href='editar.php?id='>Editar</a><a href='excluir.php?id=' onclick='return confirm('Deseja realmente excluir?')'>Excluir</a></td>
                             </tr>";
                     }
                     echo "</tbody></table>";

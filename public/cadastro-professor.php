@@ -28,9 +28,25 @@ include('../api/apagar.php');
         </div>
 
         <div class="formBox">
-            <label for="titulo">Titulo:</label>
-            <input type="text" name="titulo"required>
-        </div>
+            <!-- Select de turmas (mesmo código do formulário principal) -->
+            <label for="cod_disc">Codigo da disciplina:</label>
+            <select name="cod_disc" id="cod_disc" required>
+                <option value="">-- Selecione uma disciplina --</option>
+                <?php
+                if ($conn) {
+                    $sql = "SELECT cod_disc	,nome_disciplina ,carga_horaria FROM disciplinas";
+                    $result = $conn->query($sql);
+
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . $row['cod_disc'] . '">';
+                            echo $row['nome_disciplina'] . ' | carga horaria: ' . $row['carga_horaria'];
+                            echo '</option>';
+                        }
+                    }
+                }
+                ?>
+        </select>
     </fieldset>
 
     <button type="submit">Enviar</button>
@@ -45,11 +61,10 @@ include('../api/apagar.php');
     <fieldset>
         <legend>Editar Professor</legend>
 
-        <div class="formBox">
+                <div class="formBox">
             <label for="cpf">CPF:</label>
             <input type="text" name="cpf" minlength="11" maxlength="11" required>
         </div>
-
         <div class="formBox">
             <label for="nome">Nome:</label>
             <input type="text" name="nome" minlength="3" required>
@@ -63,9 +78,25 @@ include('../api/apagar.php');
         </div>
 
         <div class="formBox">
-            <label for="titulo">Titulo:</label>
-            <input type="text" name="titulo"required>
-        </div>
+            <!-- Select de turmas (mesmo código do formulário principal) -->
+            <label for="cod_disc">Codigo da disciplina:</label>
+            <select name="cod_disc" id="cod_disc" required>
+                <option value="">-- Selecione uma disciplina --</option>
+                <?php
+                if ($conn) {
+                    $sql = "SELECT cod_disc	,nome_disciplina ,carga_horaria FROM disciplinas";
+                    $result = $conn->query($sql);
+
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . $row['cod_disc'] . '">';
+                            echo $row['nome_disciplina'] . ' | carga horaria: ' . $row['carga_horaria'];
+                            echo '</option>';
+                        }
+                    }
+                }
+                ?>
+        </select>
     </fieldset>
 
     <div class="btnBox">
@@ -83,7 +114,7 @@ include('../api/apagar.php');
             <th>CPF</th>
             <th>Nome</th>
             <th>Data Nascimento</th>
-            <th>Titulo</th>
+            <th>Diciplina</th>
             <th>Ações</th> <!-- Editar / Apagar -->
         </tr>
     </thead>

@@ -14,7 +14,7 @@ if ($cpf === '') {
 }
 
 // ================================ Consulta no banco ================================
-$sql = "SELECT cpf, nome, data_nasc, titulo FROM professores WHERE cpf = ?";
+$sql = "SELECT cpf, nome, data_nasc, cod_disc FROM professores WHERE cpf = ?";
 $stmt = $conn->prepare($sql); // Prepara a query para evitar SQL Injection
 $stmt->bind_param('s', $cpf); // 's' indica que o parâmetro é string
 $stmt->execute();              // Executa a query

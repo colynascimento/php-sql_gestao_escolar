@@ -63,7 +63,7 @@ async function atualizarTabelaProfessor() {
                 <td>${professor.cpf}</td> <!-- CPF do professor -->
                 <td>${professor.nome}</td> <!-- Nome do professor -->
                 <td>${professor.data_nasc}</td> <!-- Data de nascimento -->
-                <td>${professor.titulo}</td> <!-- Titulo do professor -->
+                <td>${professor.cod_disc}</td> <!-- cod_disc do professor -->
                 <td>
                     <!-- Botão para editar -->
                     <button onclick="editarProfessor('${professor.cpf}')">Editar</button>
@@ -108,7 +108,7 @@ async function salvarEdicao() {
         cpf: form.cpf.value,
         nome: form.nome.value,
         data_nasc: form.data_nasc.value,
-        titulo: form.titulo.value
+        cod_disc: form.cod_disc.value
     };
 
     try {
@@ -147,7 +147,7 @@ async function editarProfessor(cpf) {
         form.cpf.value = dados.cpf || '';
         form.nome.value = dados.nome || '';
         form.data_nasc.value = dados.data_nasc || '';
-        form.titulo.value = dados.titulo || '';
+        form.cod_disc.value = dados.cod_disc || '';
     } catch (erro) {
         mostrarMensagem("Erro ao carregar professor: " + erro.message, "erro");
     }

@@ -19,6 +19,8 @@
 
         $resultado = $conn->query($sql);
 
+        echo"$resultado";
+
         if ($resultado->num_rows > 0) {
             echo "<h2>Lista de Turmas</h2>";
 

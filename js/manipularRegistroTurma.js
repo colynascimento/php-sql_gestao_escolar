@@ -69,7 +69,7 @@ async function apagarTurma(num_turma) {
         const resp = await fetch('/php-sql_gestao_escolar/api/turma/apagarTurma.php', { method: "POST", body: formData });
         const texto = await resp.text();
         mostrarMensagem(texto, texto.toLowerCase().includes("erro") ? "erro" : "sucesso");
-        atualizarTabelaAlunos(); // Atualiza a tabela após apagar
+        atualizarTabelaTurmas(); // Atualiza a tabela após apagar
     } catch (erro) {
         mostrarMensagem("Erro ao apagar: " + erro.message, "erro");
     }

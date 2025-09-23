@@ -42,7 +42,6 @@ include('../inludes/header.php');   // cabeçalho
     <div id = "mensagem"></div>
 </form>
 
-
 <form id="formEditarTurma" style="display: none;">
     <fieldset>
         <legend>Editar Turma</legend>

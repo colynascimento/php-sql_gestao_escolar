@@ -1,6 +1,5 @@
 <?php
-include('../conexao/conexao.php');
-
+include('../../conexao/conexao.php'); // Inclui a conexão com o banco de dados
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

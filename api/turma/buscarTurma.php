@@ -1,5 +1,4 @@
 <?php
-
 include('../../conexao/conexao.php');
 header('Content-Type: application/json'); 
 

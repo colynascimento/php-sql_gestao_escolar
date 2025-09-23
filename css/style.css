@@ -239,7 +239,7 @@ footer {
 /* PÁGINA ALUNOS */
 
 #formAluno, #formEditarAluno, 
-#formDisciplina, #FormEditarDisciplina,
+#formDisciplina, #formEditarDisciplina,
 #formProfessor, #formEditarProfessor,
 #formTurmas, #formEditarTurmas {
     background-color: #fff;
@@ -274,7 +274,7 @@ fieldset {
 }
 
  #formAluno label, #formEditarAluno label, 
- #formDisciplina label,  #FormEditarDisciplina label,
+ #formDisciplina label,  #formEditarDisciplina label,
  #formProfessor label, #formEditarProfessor label,
  #formTurmas label, #formEditarTurmas label {
     margin-bottom: 5px;
@@ -284,6 +284,7 @@ fieldset {
 #formAluno input, #formAluno select,
 #formEditarAluno input, #formEditarAluno select,
 #formDisciplina input, #formDisciplina select,
+#formEditarDisciplina input, #formEditarDisciplina select,
 #formProfessor input, #formEditarProfessor input,
 #formTurmas input, #formTurmas select, 
 #formEditarTurmas input, #formEditarTurmas select {
@@ -295,7 +296,7 @@ fieldset {
 
 
 #formAluno button, #formEditarAluno button, 
-#formDisciplina button,  #FormEditarDisciplina button,
+#formDisciplina button,  #formEditarDisciplina button,
 #formProfessor button, #formEditarProfessor button,
 #formTurmas button, #formEditarTurmas button {
     width: 300px; 
@@ -311,7 +312,7 @@ fieldset {
 }
 
 #formAluno button:hover, #formEditarAluno button:hover, 
-#formDisciplina button:hover, #FormEditarDisciplina button:hover,
+#formDisciplina button:hover, #formEditarDisciplina button:hover,
 #formProfessor button:hover, #formEditarProfessor button:hover,
 #formTurmas button:hover, #formEditarTurmas button:hover {
     background-color: #292DC2;
@@ -368,7 +369,7 @@ legend {
     width: 100%;
 }
 
-#formEditarAluno button, #formEditarProfessor button, #formEditarTurmas button, #FormEditarDisciplina button {
+#formEditarAluno button, #formEditarProfessor button, #formEditarTurmas button, #formEditarDisciplina button {
     width: 250px;
     background-color: #5F65F6;
     font-size: 15px;

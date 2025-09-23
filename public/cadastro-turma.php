@@ -53,7 +53,7 @@ include('../inludes/header.php');   // cabeçalho
 
         <div class="formBox">
             <label>Nome da turma: </label>
-            <input type = "text" id = "nomeTurma" name = "nomeTurma" required>
+            <input type = "text" id = "nome" name = "nome" required>
         </div>
     </fieldset>
 

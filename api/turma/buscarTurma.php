@@ -9,9 +9,10 @@ if ($num_turma === '') {
     echo json_encode(['erro' => 'Número da turma não informado']);
     exit;
 }
+$sql = "SELECT num_turma, nome, turno, sala FROM turmas WHERE num_turma = ?";
 
 $stmt = $conn->prepare($sql); // Prepara a query para evitar SQL Injection
-$stmt->bind_param('i', $num_turma); // 's' indica que o parâmetro é string
+$stmt->bind_param('i', $num_turma);  
 $stmt->execute();
 
 $result = $stmt->get_result(); // Obtém o resultado da execução

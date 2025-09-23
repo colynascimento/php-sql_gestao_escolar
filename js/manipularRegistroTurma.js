@@ -78,18 +78,19 @@ async function apagarTurma(num_turma) {
 async function salvarEdicao() {
     const form = document.querySelector('#formEditarTurma');
 
-    const turma = {
-        num_turma: form.num_turma.value,
-        nome: form.nome.value,
-        turno: form.turno.value,
-        sala: form.sala.value
-    };
+    const formData = new FormData(form);
+    // const turma = {
+    //     num_turma: form.num_turma.value,
+    //     nome: form.nome.value,
+    //     turno: form.turno.value,
+    //     sala: form.sala.value
+    // };
 
     try {
         const resp = await fetch('/php-sql_gestao_escolar/api/turma/editarTurma.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(turma)
+            // headers: { 'Content-Type': 'application/json' },
+            body: formData
         });
 
         const resultado = await resp.json();

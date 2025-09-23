@@ -1,7 +1,7 @@
 <?php
 include("../conexao/conexao.php");
 include('../inludes/header.php');   // cabeçalho
-include('../api/turma/exibirTurma.php');
+
 ?>
 
 
@@ -37,7 +37,7 @@ include('../api/turma/exibirTurma.php');
         </div>
     </fieldset>
 
-    <button type="button" name="btnCadTurma" id="btnCadTurma">Enviar</button>
+    <button type="submit">Enviar</button>
    
     <div id = "mensagem"></div>
 </form>
@@ -109,7 +109,7 @@ include('../api/turma/exibirTurma.php');
 document.getElementById('formTurmas').addEventListener('submit', e => {
     e.preventDefault(); // Impede o reload da página
     // Chama a função salvarAluno (definida em manipularRegistro.js)
-    salvarAluno('formTurmas', '/php-sql_gestao_escolar/api/turma/adicionarTurma.php', atualizarTabelaTurmas);
+    salvarTurma('formTurmas', '/php-sql_gestao_escolar/api/turma/adicionarTurma.php', atualizarTabelaTurmas);
 });
 </script>
 

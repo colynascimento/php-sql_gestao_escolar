@@ -1,6 +1,6 @@
 
 <?php
-include('../conexao/conexao.php');
+include('../../conexao/conexao.php');
 
 
 header('Content-Type: text/plain'); // Define o tipo de conteúdo da resposta como texto puro
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sala = $_POST['sala'] ?? '';
 
     // Validação duplicidade turma
-    $check = $conn->prepare("SELECT cpf FROM turmas WHERE num_turma = ?");
+    $check = $conn->prepare("SELECT num_turma FROM turmas WHERE num_turma = ?");
     $check->bind_param("s", $num_turma); // 's' indica que o parâmetro é string
     $check->execute();
     $check->store_result(); // Armazena o resultado da consulta
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insere aluno no banco
-    $stmt = $conn->prepare("INSERT INTO alunos (num_turma, nome, turno, sala) VALUES (?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO turmas (num_turma, nome, turno, sala) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("isss", $num_turma, $nome, $turno, $sala);
     // "isss" indica: integer, string, string, string
 
@@ -41,26 +41,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Fecha o statement e a conexão com o banco
     $stmt->close();
     $conn->close();
-}
-
-function inserirRegistro($conn, $tabela, $coluna, $PK, $dados) {
-    // Verifica se já existe
-    $check = $conn->query("SELECT 1 FROM $tabela WHERE $coluna = $PK");
-
-    if ($check && $check->num_rows > 0) {
-        return "<span style='color:red;'>Erro: já existe um registro com este valor ($PK).</span>";
-    }
-
-    // Monta campos e valores
-    $campos = implode(", ", array_keys($dados));
-    $valores = implode("', '", array_map([$conn, 'real_escape_string'], array_values($dados)));
-
-    $sql = "INSERT INTO $tabela ($campos) VALUES ('$valores')";
-
-    if ($conn->query($sql) === TRUE) {
-        return true;
-    } else {
-        return "Erro SQL: " . $conn->error;
-    }
 }
 ?>

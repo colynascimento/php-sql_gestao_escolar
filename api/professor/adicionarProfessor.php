@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cpf = $_POST['cpf'] ?? '';
     $nome = $_POST['nome'] ?? '';
     $data_nasc = $_POST['data_nasc'] ?? '';
-    $titulo = $_POST['titulo'] ?? '';
+    $cod_disc = $_POST['cod_disc'] ?? '';
     // ================================ Verifica duplicidade de CPF ================================
     // Prepara a query para verificar se o CPF já existe
     $check = $conn->prepare("SELECT cpf FROM professores WHERE cpf = ?");
@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // ================================ Insere professor no banco ================================
     // Prepara a query de inserção
-    $stmt = $conn->prepare("INSERT INTO professores (cpf, nome, data_nasc, titulo) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $cpf, $nome, $data_nasc, $titulo);
+    $stmt = $conn->prepare("INSERT INTO professores (cpf, nome, data_nasc, cod_disc) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $cpf, $nome, $data_nasc, $cod_disc);
     // "sssi" indica: string, string, string, integer
 
     // Executa a inserção e verifica se funcionou

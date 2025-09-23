@@ -15,13 +15,13 @@ if (!$dados) {
 }
 
 // ================================ Prepara a query de atualização ================================
-$sql = "UPDATE professores SET nome = ?, data_nasc = ?, titulo = ? WHERE cpf = ?";
+$sql = "UPDATE professores SET nome = ?, data_nasc = ?, cod_disc = ? WHERE cpf = ?";
 $stmt = $conn->prepare($sql); 
 // Prepara a query para evitar SQL Injection
 // Atualiza nome, data de nascimento e turma baseado no CPF
 
 // Bind dos parâmetros: 'ssis' indica string, string, integer, string
-$stmt->bind_param('ssss', $dados['nome'], $dados['data_nasc'], $dados['titulo'], $dados['cpf']);
+$stmt->bind_param('ssis', $dados['nome'], $dados['data_nasc'], $dados['cod_disc'], $dados['cpf']);
 
 // ================================ Executa e verifica ================================
 if ($stmt->execute()) {

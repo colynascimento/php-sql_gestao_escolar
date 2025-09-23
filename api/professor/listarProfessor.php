@@ -8,7 +8,7 @@ $professores = [];
 
 // ================================ Busca todos os professores ================================
 if ($conn) { // Verifica se a conexão existe
-    $result = $conn->query("SELECT cpf, nome, data_nasc, titulo FROM professores"); 
+    $result = $conn->query("SELECT cpf, nome, data_nasc, cod_disc FROM professores"); 
     // Executa a query para buscar todos os professores
     
     if ($result) { // Se a consulta retornou resultados

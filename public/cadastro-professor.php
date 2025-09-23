@@ -28,8 +28,28 @@ include('../api/apagar.php');
         </div>
 
         <div class="formBox">
-            <label for="titulo">Titulo:</label>
-            <input type="text" name="titulo"required>
+            <label for="cod_disc">Disciplina:</label>
+             <select name="cod_disc" id="cod_disc" required>
+                <option value="">-- Selecione uma disciplina --</option>
+                <?php
+                // Busca todas as disciplinas cadastradas no banco
+                if ($conn) {
+                    $sql = "SELECT cod_disc, nome_disciplina FROM disciplinas";
+                    $result = $conn->query($sql);
+
+                    // Se houver resultados, gera cada <option>
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            // Cada opção tem como value o número da disciplina
+                            // E exibe: Nome 
+                            echo '<option value="' . $row['cod_disc'] . '">';
+                            echo $row['nome_disciplina'];
+                            echo '</option>';
+                        }
+                    }
+                }
+                ?>
+            </select>
         </div>
     </fieldset>
 
@@ -63,8 +83,28 @@ include('../api/apagar.php');
         </div>
 
         <div class="formBox">
-            <label for="titulo">Titulo:</label>
-            <input type="text" name="titulo"required>
+            <label for="cod_disc">Disciplina:</label>
+             <select name="cod_disc" id="cod_disc" required>
+                <option value="">-- Selecione uma disciplina --</option>
+                <?php
+                // Busca todas as disciplinas cadastradas no banco
+                if ($conn) {
+                    $sql = "SELECT cod_disc, nome_disciplina FROM disciplinas";
+                    $result = $conn->query($sql);
+
+                    // Se houver resultados, gera cada <option>
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            // Cada opção tem como value o número da disciplina
+                            // E exibe: Nome 
+                            echo '<option value="' . $row['cod_disc'] . '">';
+                            echo $row['nome_disciplina'];
+                            echo '</option>';
+                        }
+                    }
+                }
+                ?>
+            </select>
         </div>
     </fieldset>
 
@@ -83,7 +123,7 @@ include('../api/apagar.php');
             <th>CPF</th>
             <th>Nome</th>
             <th>Data Nascimento</th>
-            <th>Titulo</th>
+            <th>Disciplina</th>
             <th>Ações</th> <!-- Editar / Apagar -->
         </tr>
     </thead>

@@ -247,7 +247,7 @@ footer {
     border: 1px solid #ccc;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     
-    height: 250px;
+    height: 290px;
     display: flex;
     flex-direction: column;             
     justify-content: center; 
@@ -328,25 +328,25 @@ h2 {
 #legendaFormAlunos::before {
     content: "👨🏽‍🎓";
     font-size: 20px;
-    margin-right: 6px;
+    margin: 0 0 20px 6px;
 }
 
 #legendaFormDisciplinas::before {
     content: "📚";
     font-size: 20px;
-    margin-right: 6px;
+    margin: 0 0 20px 6px;
 }
 
 #legendaFormProfessores::before {
     content: "👩🏻‍🏫";
     font-size: 20px;
-    margin-right: 6px;
+    margin: 0 0 20px 6px;
 }
 
 #legendaFormTurmas::before {
     content: "🏫";
     font-size: 20px;
-    margin-right: 6px;
+    margin: 0 0 20px 6px;
 }
 
 th {

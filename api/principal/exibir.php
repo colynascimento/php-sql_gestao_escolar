@@ -65,7 +65,7 @@
                                 <td scope='row' colspan='1'>" . $aluno['cpf'] . "</td>
                             </tr>";
                     }
-                    echo "</tbody></table>";
+                    echo "</tbody></table></section>";
                 } else {
                     echo "<tbody>";
                     echo "<tr><td scope='row' colspan='4'>Nenhum aluno cadastrado nessa turma.</td></tr>";
